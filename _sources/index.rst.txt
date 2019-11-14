@@ -24,7 +24,8 @@ Welcome to NNP's documentation!
     :maxdepth: 2
     :caption: API
 
-    api
+    .. automodule:: nnp
+        :members:
 
 Indices and tables
 ==================
