@@ -1,0 +1,34 @@
+===============================
+Welcome to NNP's documentation!
+===============================
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Getting Started
+
+    start
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Code
+
+    code
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Examples
+
+    examples
+
+.. toctree::
+    :maxdepth: 2
+    :caption: API
+
+    api
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
