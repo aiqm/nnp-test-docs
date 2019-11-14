@@ -12,13 +12,13 @@ Welcome to NNP's documentation!
     :maxdepth: 2
     :caption: Code
 
-    code
+    code/index
 
 .. toctree::
     :maxdepth: 2
     :caption: Examples
 
-    examples
+    examples/index
 
 .. toctree::
     :maxdepth: 2
