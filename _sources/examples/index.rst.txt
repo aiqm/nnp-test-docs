@@ -9,7 +9,7 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This tutorial shows how to use ASE to simulate planetary motion. Although both">
+    <div class="sphx-glr-thumbcontainer" tooltip="This tutorial shows how to use `ASE`_ to simulate planetary motion. Although both ASE and NNP a...">
 
 .. only:: html
 

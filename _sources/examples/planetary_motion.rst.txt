@@ -10,8 +10,45 @@
 Use ASE to Simulate Planetary Motion
 ====================================
 
-This tutorial shows how to use ASE to simulate planetary motion.
-Although both
+This tutorial shows how to use `ASE`_ to simulate planetary motion.
+Although both ASE and NNP are designed for molecular dynamics (MD),
+implementing a force field to do MD is not at a reasonable abount of
+work to use as a tutorial. So we simulate something different here.
+Assume we have two atoms, one hydrogen and one carbon. They are all
+moving under the gravity centered at the origin. There is no interaction
+between these two atoms.
+
+.. _ASE:
+    https://wiki.fysik.dtu.dk/ase
+
+Let's first import all the packages we will use.
+
+
+.. code-block:: default
+
+    import torch
+    import ase
+    import nnp
+    import pytest
+
+
+
+
+
+
+
+
+Let's first import all the packages we will use.
+
+
+.. code-block:: default
+
+
+    def test_result():
+        return
+
+    if __name__ == '__main__':
+        pytest.main()
 
 
 
@@ -29,32 +66,14 @@ Although both
 
     planetary_motion.py .                                                    [100%]
 
-    ============================== 1 passed in 0.29s ===============================
+    ============================== 1 passed in 0.01s ===============================
 
 
-
-
-
-|
-
-
-.. code-block:: default
-
-    import torch
-    import ase
-    import nnp
-    import pytest
-
-    def test_result():
-        return
-
-    if __name__ == '__main__':
-        pytest.main()
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.039 seconds)
+   **Total running time of the script:** ( 0 minutes  0.477 seconds)
 
 
 .. _sphx_glr_download_examples_planetary_motion.py:
