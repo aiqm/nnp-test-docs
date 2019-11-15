@@ -9,7 +9,7 @@ This is the actually implementation. It is also self explained and export to doc
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This file contains">
+    <div class="sphx-glr-thumbcontainer" tooltip="This file contains ">
 
 .. only:: html
 

@@ -31,10 +31,13 @@ This file contains
         Arguments:
             cell (:class:`torch.Tensor`): tensor of shape (3, 3) of the three
                 vectors defining unit cell:
+
                 .. code-block:: python
+
                     tensor([[x1, y1, z1],
                             [x2, y2, z2],
                             [x3, y3, z3]])
+
             coordinates (:class:`torch.Tensor`): Tensor of shape ``(atoms, 3)``
                 or ``(molecules, atoms, 3)``.
             pbc (:class:`torch.Tensor`): boolean vector of size 3 storing
@@ -55,7 +58,7 @@ This file contains
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.331 seconds)
+   **Total running time of the script:** ( 0 minutes  0.048 seconds)
 
 
 .. _sphx_glr_download_code_pbc.py:

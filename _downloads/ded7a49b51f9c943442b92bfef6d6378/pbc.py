@@ -15,10 +15,13 @@ def map2central(cell: Tensor, coordinates: Tensor, pbc: Tensor) -> Tensor:
     Arguments:
         cell (:class:`torch.Tensor`): tensor of shape (3, 3) of the three
             vectors defining unit cell:
+
             .. code-block:: python
+
                 tensor([[x1, y1, z1],
                         [x2, y2, z2],
                         [x3, y3, z3]])
+
         coordinates (:class:`torch.Tensor`): Tensor of shape ``(atoms, 3)``
             or ``(molecules, atoms, 3)``.
         pbc (:class:`torch.Tensor`): boolean vector of size 3 storing

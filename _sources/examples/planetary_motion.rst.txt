@@ -10,12 +10,51 @@
 Use ASE to Simulate Planetary Motion
 ====================================
 
-TODO
+This tutorial shows how to use ASE to simulate planetary motion.
+Although both
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    ============================= test session starts ==============================
+    platform linux -- Python 3.6.9, pytest-5.2.3, py-1.8.0, pluggy-0.13.0
+    rootdir: /home/runner/work/nnp/nnp, inifile: setup.cfg
+    collected 1 item
+
+    planetary_motion.py .                                                    [100%]
+
+    ============================== 1 passed in 1.91s ===============================
+
+
+
+
+
+|
+
+
+.. code-block:: default
+
+    import torch
+    import ase
+    import nnp
+    import pytest
+
+    def test_result():
+        return
+
+    if __name__ == '__main__':
+        pytest.main()
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.029 seconds)
+   **Total running time of the script:** ( 0 minutes  2.629 seconds)
 
 
 .. _sphx_glr_download_examples_planetary_motion.py:

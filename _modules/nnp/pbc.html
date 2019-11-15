@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nnp.pbc &mdash; NNP 0.1.dev31+g2b6a7d4 documentation</title>
+  <title>nnp.pbc &mdash; NNP 0.1.dev37+g43ff97e documentation</title>
   
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.1.dev31+g2b6a7d4
+                0.1.dev37+g43ff97e
               </div>
             
           
@@ -93,7 +93,9 @@
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">Periodic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html#molecular-dynamics">Molecular Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html#vibrational-analysis">Vibrational Analysis</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Implementation Walkthrough</span></p>
 <ul>
@@ -180,10 +182,13 @@
 <span class="sd">    Arguments:</span>
 <span class="sd">        cell (:class:`torch.Tensor`): tensor of shape (3, 3) of the three</span>
 <span class="sd">            vectors defining unit cell:</span>
+
 <span class="sd">            .. code-block:: python</span>
+
 <span class="sd">                tensor([[x1, y1, z1],</span>
 <span class="sd">                        [x2, y2, z2],</span>
 <span class="sd">                        [x3, y3, z3]])</span>
+
 <span class="sd">        coordinates (:class:`torch.Tensor`): Tensor of shape ``(atoms, 3)``</span>
 <span class="sd">            or ``(molecules, atoms, 3)``.</span>
 <span class="sd">        pbc (:class:`torch.Tensor`): boolean vector of size 3 storing</span>

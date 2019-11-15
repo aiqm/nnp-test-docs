@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Molecular Dynamics
 ==================
@@ -38,18 +37,19 @@ class Calculator(ase.calculators.calculator.Calculator):
                   system_changes=ase.calculators.calculator.all_changes):
         super(Calculator, self).calculate(atoms, properties, system_changes)
         cell = torch.from_numpy(self.atoms.get_cell(complete=True))
-        pbc = torch.tensor(self.atoms.get_pbc(), dtype=torch.bool)
+        pbc_ = torch.tensor(self.atoms.get_pbc(), dtype=torch.bool)
         coordinates = torch.from_numpy(self.atoms.get_positions()).requires_grad_('forces' in properties)
         pbc_enabled = pbc.any().item()
 
         if pbc_enabled:
-            coordinates = map2central(cell, coordinates, pbc)
-            if 'stress' in properties:
-                scaling = torch.eye(3, requires_grad=True)
-                coordinates = coordinates @ scaling
-                cell = cell @ scaling
+            coordinates = pbc.map2central(cell, coordinates, pbc_)
 
-        energy = self.func(atoms.get_chemical_symbols(), coordinates, cell, pbc)
+        if 'stress' in properties:
+            scaling = torch.eye(3, requires_grad=True)
+            coordinates = coordinates @ scaling
+            cell = cell @ scaling
+
+        energy = self.func(atoms.get_chemical_symbols(), coordinates, cell, pbc_)
 
         self.results['energy'] = energy.item()
         self.results['free_energy'] = energy.item()
