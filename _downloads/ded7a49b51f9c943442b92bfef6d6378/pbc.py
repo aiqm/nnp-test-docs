@@ -1,4 +1,9 @@
-"""TODO: doc"""
+"""
+Periodic Boundary Conditions
+============================
+
+This file contains
+"""
 
 import torch
 from torch import Tensor

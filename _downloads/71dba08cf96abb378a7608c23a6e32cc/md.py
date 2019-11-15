@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Use Neural Network Potentials for Molecular Dynamics
-====================================================
+Molecular Dynamics
+==================
 
 Currently it contains a calculator for `ASE`_.
 
@@ -12,7 +12,7 @@ Currently it contains a calculator for `ASE`_.
 import torch
 from torch import Tensor
 import ase.calculators.calculator
-from pbc import map2central
+from nnp import pbc
 from typing import Callable, Sequence
 
 

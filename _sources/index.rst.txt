@@ -10,12 +10,6 @@ Welcome to NNP's documentation!
 
 .. toctree::
     :maxdepth: 2
-    :caption: Code
-
-    code/index
-
-.. toctree::
-    :maxdepth: 2
     :caption: Examples
 
     examples/index
@@ -24,8 +18,13 @@ Welcome to NNP's documentation!
     :maxdepth: 2
     :caption: API
 
-.. automodule:: nnp
-    :members:
+    api
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Implementation Walkthrough
+
+    code/index
 
 Indices and tables
 ==================

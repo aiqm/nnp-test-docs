@@ -1,4 +1,7 @@
-"""TODO: doc"""
+"""
+Vibrational Analysis
+====================
+"""
 
 import torch
 from torch import Tensor
