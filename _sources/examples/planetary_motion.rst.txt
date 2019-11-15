@@ -60,20 +60,20 @@ Let's first import all the packages we will use.
  .. code-block:: none
 
     ============================= test session starts ==============================
-    platform linux -- Python 3.7.5, pytest-5.2.3, py-1.8.0, pluggy-0.13.0
+    platform linux -- Python 3.6.9, pytest-5.2.3, py-1.8.0, pluggy-0.13.0
     rootdir: /home/runner/work/nnp/nnp, inifile: setup.cfg
     collected 1 item
 
     planetary_motion.py .                                                    [100%]
 
-    ============================== 1 passed in 0.01s ===============================
+    ============================== 1 passed in 0.37s ===============================
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.477 seconds)
+   **Total running time of the script:** ( 0 minutes  1.144 seconds)
 
 
 .. _sphx_glr_download_examples_planetary_motion.py:
