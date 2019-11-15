@@ -2,10 +2,8 @@
 Molecular Dynamics
 ==================
 
-Currently it contains a calculator for `ASE`_.
-
-.. _ASE:
-    https://wiki.fysik.dtu.dk/ase
+The module `nnp.md` provide tools to run molecular dynamics with a potential
+defined by PyTorch.
 """
 
 import torch
@@ -36,10 +34,10 @@ class Calculator(ase.calculators.calculator.Calculator):
     def calculate(self, atoms=None, properties=['energy'],
                   system_changes=ase.calculators.calculator.all_changes):
         super(Calculator, self).calculate(atoms, properties, system_changes)
-        cell = torch.from_numpy(self.atoms.get_cell(complete=True))
-        pbc_ = torch.tensor(self.atoms.get_pbc(), dtype=torch.bool)
         coordinates = torch.from_numpy(self.atoms.get_positions()).requires_grad_('forces' in properties)
-        pbc_enabled = pbc.any().item()
+        cell = coordinates.new_tensor(self.atoms.get_cell(complete=True).array)
+        pbc_ = torch.tensor(self.atoms.get_pbc(), dtype=torch.bool)
+        pbc_enabled = pbc_.any().item()
 
         if pbc_enabled:
             coordinates = pbc.map2central(cell, coordinates, pbc_)

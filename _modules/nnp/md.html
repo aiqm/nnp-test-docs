@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nnp.md &mdash; NNP 0.1.dev38+g4cd9744 documentation</title>
+  <title>nnp.md &mdash; NNP 0.1.dev40+ge89f88e documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
         <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -59,7 +60,7 @@
             
             
               <div class="version">
-                0.1.dev38+g4cd9744
+                0.1.dev40+ge89f88e
               </div>
             
           
@@ -169,10 +170,8 @@
 <span class="sd">Molecular Dynamics</span>
 <span class="sd">==================</span>
 
-<span class="sd">Currently it contains a calculator for `ASE`_.</span>
-
-<span class="sd">.. _ASE:</span>
-<span class="sd">    https://wiki.fysik.dtu.dk/ase</span>
+<span class="sd">The module `nnp.md` provide tools to run molecular dynamics with a potential</span>
+<span class="sd">defined by PyTorch.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">torch</span>
@@ -203,10 +202,10 @@
 <div class="viewcode-block" id="Calculator.calculate"><a class="viewcode-back" href="../../api.html#nnp.md.Calculator.calculate">[docs]</a>    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">],</span>
                   <span class="n">system_changes</span><span class="o">=</span><span class="n">ase</span><span class="o">.</span><span class="n">calculators</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">all_changes</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Calculator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">system_changes</span><span class="p">)</span>
-        <span class="n">cell</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">get_cell</span><span class="p">(</span><span class="n">complete</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-        <span class="n">pbc_</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">get_pbc</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
         <span class="n">coordinates</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">get_positions</span><span class="p">())</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">(</span><span class="s1">&#39;forces&#39;</span> <span class="ow">in</span> <span class="n">properties</span><span class="p">)</span>
-        <span class="n">pbc_enabled</span> <span class="o">=</span> <span class="n">pbc</span><span class="o">.</span><span class="n">any</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">cell</span> <span class="o">=</span> <span class="n">coordinates</span><span class="o">.</span><span class="n">new_tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">get_cell</span><span class="p">(</span><span class="n">complete</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">array</span><span class="p">)</span>
+        <span class="n">pbc_</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">get_pbc</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+        <span class="n">pbc_enabled</span> <span class="o">=</span> <span class="n">pbc_</span><span class="o">.</span><span class="n">any</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">pbc_enabled</span><span class="p">:</span>
             <span class="n">coordinates</span> <span class="o">=</span> <span class="n">pbc</span><span class="o">.</span><span class="n">map2central</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">,</span> <span class="n">pbc_</span><span class="p">)</span>

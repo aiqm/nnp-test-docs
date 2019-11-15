@@ -29,7 +29,7 @@ This is the actually implementation. It is also self explained and export to doc
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Currently it contains a calculator for `ASE`_.">
+    <div class="sphx-glr-thumbcontainer" tooltip="The module nnp.md provide tools to run molecular dynamics with a potential defined by PyTorch. ">
 
 .. only:: html
 

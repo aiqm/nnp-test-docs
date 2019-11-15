@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Periodic Boundary Conditions &mdash; NNP 0.1.dev38+g4cd9744 documentation</title>
+  <title>Periodic Boundary Conditions &mdash; NNP 0.1.dev40+ge89f88e documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -61,7 +62,7 @@
             
             
               <div class="version">
-                0.1.dev38+g4cd9744
+                0.1.dev40+ge89f88e
               </div>
             
           
@@ -180,7 +181,7 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>cell</strong> (<a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+7a6c3b3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>) – <p>tensor of shape (3, 3) of the three
+<li><strong>cell</strong> (<a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+6dc8d72 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>) – <p>tensor of shape (3, 3) of the three
 vectors defining unit cell:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="p">([[</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">z1</span><span class="p">],</span>
         <span class="p">[</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">z2</span><span class="p">],</span>
@@ -188,9 +189,9 @@ vectors defining unit cell:</p>
 </pre></div>
 </div>
 </li>
-<li><strong>coordinates</strong> (<a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+7a6c3b3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>) – Tensor of shape <code class="docutils literal notranslate"><span class="pre">(atoms,</span> <span class="pre">3)</span></code>
+<li><strong>coordinates</strong> (<a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+6dc8d72 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>) – Tensor of shape <code class="docutils literal notranslate"><span class="pre">(atoms,</span> <span class="pre">3)</span></code>
 or <code class="docutils literal notranslate"><span class="pre">(molecules,</span> <span class="pre">atoms,</span> <span class="pre">3)</span></code>.</li>
-<li><strong>pbc</strong> (<a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+7a6c3b3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>) – boolean vector of size 3 storing
+<li><strong>pbc</strong> (<a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+6dc8d72 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>) – boolean vector of size 3 storing
 if pbc is enabled for that direction.</li>
 </ul>
 </td>
@@ -198,7 +199,7 @@ if pbc is enabled for that direction.</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">coordinates of atoms mapped back to unit cell.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+7a6c3b3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+6dc8d72 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a></p>
 </td>
 </tr>
 </tbody>
@@ -208,7 +209,8 @@ if pbc is enabled for that direction.</li>
 </div>
 <span class="target" id="module-nnp.md"></span><div class="section" id="molecular-dynamics">
 <h1>Molecular Dynamics<a class="headerlink" href="#molecular-dynamics" title="Permalink to this headline">¶</a></h1>
-<p>Currently it contains a calculator for <a class="reference external" href="https://wiki.fysik.dtu.dk/ase">ASE</a>.</p>
+<p>The module <cite>nnp.md</cite> provide tools to run molecular dynamics with a potential
+defined by PyTorch.</p>
 <dl class="class">
 <dt id="nnp.md.Calculator">
 <em class="property">class </em><code class="descclassname">nnp.md.</code><code class="descname">Calculator</code><span class="sig-paren">(</span><em>func: Callable[[Sequence[str], torch.Tensor, torch.Tensor, torch.Tensor], torch.Tensor], overwrite: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nnp/md.html#Calculator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.md.Calculator" title="Permalink to this definition">¶</a></dt>
@@ -287,12 +289,12 @@ implementation to set the atoms attribute.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>coordinates</strong> (<a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+7a6c3b3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>) – Tensor of shape <cite>(molecules, atoms, 3)</cite> or
+<li><strong>coordinates</strong> (<a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+6dc8d72 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>) – Tensor of shape <cite>(molecules, atoms, 3)</cite> or
 <code class="docutils literal notranslate"><span class="pre">(atoms,</span> <span class="pre">3)</span></code>.</li>
-<li><strong>energies</strong> (<a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+7a6c3b3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>) – Tensor of shape <cite>(molecules,)</cite>, if specified,
+<li><strong>energies</strong> (<a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+6dc8d72 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>) – Tensor of shape <cite>(molecules,)</cite>, if specified,
 then <cite>forces</cite> must be <cite>None</cite>. This energies must be computed from
 <cite>coordinates</cite> in a graph.</li>
-<li><strong>forces</strong> (<a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+7a6c3b3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>) – Tensor of shape <cite>(molecules, atoms, 3)</cite>, if specified,
+<li><strong>forces</strong> (<a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+6dc8d72 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a>) – Tensor of shape <cite>(molecules, atoms, 3)</cite>, if specified,
 then <cite>energies</cite> must be <cite>None</cite>. This forces must be computed from
 <cite>coordinates</cite> in a graph.</li>
 </ul>
@@ -302,7 +304,7 @@ then <cite>energies</cite> must be <cite>None</cite>. This forces must be comput
 atoms in each molecule</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+7a6c3b3 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.4.0a0+6dc8d72 ))"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a></p>
 </td>
 </tr>
 </tbody>
