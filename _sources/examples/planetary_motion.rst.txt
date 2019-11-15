@@ -219,14 +219,14 @@ the XY plane and if the trajectory is circle:
 
     planetary_motion.py ..                                                   [100%]
 
-    ============================== 2 passed in 29.40s ==============================
+    ============================== 2 passed in 25.16s ==============================
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  59.831 seconds)
+   **Total running time of the script:** ( 0 minutes  51.270 seconds)
 
 
 .. _sphx_glr_download_examples_planetary_motion.py:
