@@ -5,8 +5,8 @@
 
 Computation times
 =================
-**00:00.128** total execution time for **code** files:
+**00:00.141** total execution time for **code** files:
 
-- **00:00.054**: :ref:`sphx_glr_code_pbc.py` (``pbc.py``)
-- **00:00.038**: :ref:`sphx_glr_code_md.py` (``md.py``)
-- **00:00.036**: :ref:`sphx_glr_code_vib.py` (``vib.py``)
+- **00:00.055**: :ref:`sphx_glr_code_pbc.py` (``pbc.py``)
+- **00:00.043**: :ref:`sphx_glr_code_md.py` (``md.py``)
+- **00:00.042**: :ref:`sphx_glr_code_vib.py` (``vib.py``)
