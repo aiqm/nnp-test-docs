@@ -9,6 +9,26 @@ Examples
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Rotation in 3D Space">
+
+.. only:: html
+
+    .. figure:: /examples/images/thumb/sphx_glr_rotation3d_thumb.png
+
+        :ref:`sphx_glr_examples_rotation3d.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/rotation3d
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="This tutorial shows how to use `ASE`_ to simulate planetary motion. Although both ASE and NNP a...">
 
 .. only:: html

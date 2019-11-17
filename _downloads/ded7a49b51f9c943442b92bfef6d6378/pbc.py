@@ -19,7 +19,7 @@ def num_repeats(cell: Tensor, pbc: Tensor, cutoff: float) -> Tensor:
     the given cutoff distance are contained in the big box.
 
     Arguments:
-        cell: tensor of shape (3, 3) of the three vectors defining unit cell:
+        cell: tensor of shape ``(3, 3)`` of the three vectors defining unit cell:
 
             .. code-block:: python
 
