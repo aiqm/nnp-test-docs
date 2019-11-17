@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Periodic Boundary Conditions &mdash; NNP 0.0.3.dev6+gcf51397 documentation</title>
+  <title>Periodic Boundary Conditions &mdash; NNP 0.0.3.dev8+g212dd0f documentation</title>
   
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.0.3.dev6+gcf51397
+                0.0.3.dev8+g212dd0f
               </div>
             
           
@@ -187,7 +187,7 @@
 </pre></div>
 </div>
 <p>The following function computes the number of repeats required to capture
-all the neighbor atoms within the cutoff radius</p>
+all the neighbor atoms within the cutoff radius.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">num_repeats</span><span class="p">(</span><span class="n">cell</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">pbc</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Compute the number of repeats required along each cell vector to make</span>
 <span class="sd">    the original cell and repeated cells together form a large enough box</span>
@@ -245,7 +245,7 @@ all the neighbor atoms within the cutoff radius</p>
     <span class="k">return</span> <span class="n">coordinates_cell</span> <span class="o">@</span> <span class="n">cell</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.032 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.037 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-code-pbc-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../_downloads/ded7a49b51f9c943442b92bfef6d6378/pbc.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">pbc.py</span></code></a></div>

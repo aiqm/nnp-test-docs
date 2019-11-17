@@ -38,9 +38,14 @@ from torch.jit import Final
 # matrix Lie algebra/group, it is not hard to see that the set of
 # all rotation operations along the axis :math:`\vec{n}` is a one
 # parameter Lie group. And the skew-symmetric matrices together
-# with standard matrix commutator is a Lie algebra. This Lie group
-# and Lie algebra is connected by the exponential map. So it is easy
-# to tell that:
+# with standard matrix commutator is a Lie algebra.This Lie group
+# and Lie algebra is connected by the exponential map. See Wikipedia
+# `Exponential map (Lie theory)`_ for more detail.
+#
+# .. _Exponential map (Lie theory):
+#   https://en.wikipedia.org/wiki/Exponential_map_(Lie_theory)
+#
+# So it is easy to tell that:
 #
 # .. math::
 #   \vec{r}\left(\theta\right) = \exp \left(\theta W\right) \cdot
@@ -80,5 +85,7 @@ def rotate_along(axis: Tensor) -> Tensor:
     Return:
         the rotational matrix :math:`\exp{\left(\theta W\right)}`.
     """
+    print(levi_civita)
     W = torch.einsum('ijk,j->ik', levi_civita.to(axis), axis)
+    print(W)
     return expm(W)

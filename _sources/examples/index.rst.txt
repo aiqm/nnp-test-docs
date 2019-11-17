@@ -9,7 +9,7 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Rotation in 3D Space">
+    <div class="sphx-glr-thumbcontainer" tooltip="This tutorial demonstrates how rotate a group of points in 3D space.">
 
 .. only:: html
 

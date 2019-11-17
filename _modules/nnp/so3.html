@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nnp.so3 &mdash; NNP 0.0.3.dev6+gcf51397 documentation</title>
+  <title>nnp.so3 &mdash; NNP 0.0.3.dev8+g212dd0f documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.0.3.dev6+gcf51397
+                0.0.3.dev8+g212dd0f
               </div>
             
           
@@ -209,9 +209,14 @@
 <span class="c1"># matrix Lie algebra/group, it is not hard to see that the set of</span>
 <span class="c1"># all rotation operations along the axis :math:`\vec{n}` is a one</span>
 <span class="c1"># parameter Lie group. And the skew-symmetric matrices together</span>
-<span class="c1"># with standard matrix commutator is a Lie algebra. This Lie group</span>
-<span class="c1"># and Lie algebra is connected by the exponential map. So it is easy</span>
-<span class="c1"># to tell that:</span>
+<span class="c1"># with standard matrix commutator is a Lie algebra.This Lie group</span>
+<span class="c1"># and Lie algebra is connected by the exponential map. See Wikipedia</span>
+<span class="c1"># `Exponential map (Lie theory)`_ for more detail.</span>
+<span class="c1">#</span>
+<span class="c1"># .. _Exponential map (Lie theory):</span>
+<span class="c1">#   https://en.wikipedia.org/wiki/Exponential_map_(Lie_theory)</span>
+<span class="c1">#</span>
+<span class="c1"># So it is easy to tell that:</span>
 <span class="c1">#</span>
 <span class="c1"># .. math::</span>
 <span class="c1">#   \vec{r}\left(\theta\right) = \exp \left(\theta W\right) \cdot</span>
@@ -251,7 +256,9 @@
 <span class="sd">    Return:</span>
 <span class="sd">        the rotational matrix :math:`\exp{\left(\theta W\right)}`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">levi_civita</span><span class="p">)</span>
     <span class="n">W</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ijk,j-&gt;ik&#39;</span><span class="p">,</span> <span class="n">levi_civita</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">axis</span><span class="p">),</span> <span class="n">axis</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">expm</span><span class="p">(</span><span class="n">W</span><span class="p">)</span></div>
 </pre></div>
 

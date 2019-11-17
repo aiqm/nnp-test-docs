@@ -28,7 +28,7 @@ Let's first import all the packages we will use:
 
 
 The following function computes the number of repeats required to capture
-all the neighbor atoms within the cutoff radius
+all the neighbor atoms within the cutoff radius.
 
 
 .. code-block:: default
@@ -97,7 +97,7 @@ all the neighbor atoms within the cutoff radius
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.032 seconds)
+   **Total running time of the script:** ( 0 minutes  0.037 seconds)
 
 
 .. _sphx_glr_download_code_pbc.py:

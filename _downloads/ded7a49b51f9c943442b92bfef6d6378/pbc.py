@@ -12,7 +12,7 @@ from torch import Tensor
 
 ###############################################################################
 # The following function computes the number of repeats required to capture
-# all the neighbor atoms within the cutoff radius
+# all the neighbor atoms within the cutoff radius.
 def num_repeats(cell: Tensor, pbc: Tensor, cutoff: float) -> Tensor:
     """Compute the number of repeats required along each cell vector to make
     the original cell and repeated cells together form a large enough box

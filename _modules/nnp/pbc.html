@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nnp.pbc &mdash; NNP 0.0.3.dev6+gcf51397 documentation</title>
+  <title>nnp.pbc &mdash; NNP 0.0.3.dev8+g212dd0f documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.0.3.dev6+gcf51397
+                0.0.3.dev8+g212dd0f
               </div>
             
           
@@ -183,7 +183,7 @@
 
 <span class="c1">###############################################################################</span>
 <span class="c1"># The following function computes the number of repeats required to capture</span>
-<span class="c1"># all the neighbor atoms within the cutoff radius</span>
+<span class="c1"># all the neighbor atoms within the cutoff radius.</span>
 <div class="viewcode-block" id="num_repeats"><a class="viewcode-back" href="../../api.html#nnp.pbc.num_repeats">[docs]</a><span class="k">def</span> <span class="nf">num_repeats</span><span class="p">(</span><span class="n">cell</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">pbc</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Compute the number of repeats required along each cell vector to make</span>
 <span class="sd">    the original cell and repeated cells together form a large enough box</span>

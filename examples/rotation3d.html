@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Rotation in 3D Space &mdash; NNP 0.0.3.dev6+gcf51397 documentation</title>
+  <title>Rotation in 3D Space &mdash; NNP 0.0.3.dev8+g212dd0f documentation</title>
   
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.0.3.dev6+gcf51397
+                0.0.3.dev8+g212dd0f
               </div>
             
           
@@ -180,7 +180,61 @@
 </div>
 <div class="sphx-glr-example-title section" id="rotation-in-3d-space">
 <span id="sphx-glr-examples-rotation3d-py"></span><h1>Rotation in 3D Space<a class="headerlink" href="#rotation-in-3d-space" title="Permalink to this headline">¶</a></h1>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.030 seconds)</p>
+<p>This tutorial demonstrates how rotate a group of points in 3D space.</p>
+<p>To begin with, we must understand that rotation is a linear transformation.
+The set of all rotations forms the group SO(3). It is a Lie group that each
+group element is described by an orthogonal 3x3 matrix.</p>
+<p>That is, if you have two points <span class="math notranslate nohighlight">\(\vec{r}_1\)</span> and <span class="math notranslate nohighlight">\(\vec{r}_2\)</span>, and
+you want to rotate the two points along the same axis for the same number of
+degrees, then there is a single orthogonal matrix <span class="math notranslate nohighlight">\(R\)</span> that no matter
+the value of <span class="math notranslate nohighlight">\(\vec{r}_1\)</span> and <span class="math notranslate nohighlight">\(\vec{r}_2\)</span>, their rotation is always
+<span class="math notranslate nohighlight">\(R\cdot\vec{r}_1\)</span> and <span class="math notranslate nohighlight">\(R\cdot\vec{r}_2\)</span>.</p>
+<p>Let’s import libraries first</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">nnp.so3</span> <span class="k">as</span> <span class="nn">so3</span>
+</pre></div>
+</div>
+<p>Let’s first take a look at a special case: rotating <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>, <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">1,</span> <span class="pre">0)</span></code>
+and <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">1)</span></code> along the diagonal for 120 degree, this should permute these
+points:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">axis</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">so3</span><span class="o">.</span><span class="n">rotate_along</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="n">rotated</span> <span class="o">=</span> <span class="n">R</span> <span class="o">@</span> <span class="n">points</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="o">.</span><span class="n">t</span><span class="p">()</span> <span class="o">@</span> <span class="n">R</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>tensor([[[ 0.,  0.,  0.],
+         [ 0.,  0.,  1.],
+         [ 0., -1.,  0.]],
+
+        [[ 0.,  0., -1.],
+         [ 0.,  0.,  0.],
+         [ 1.,  0.,  0.]],
+
+        [[ 0.,  1.,  0.],
+         [-1.,  0.,  0.],
+         [ 0.,  0.,  0.]]])
+tensor([[ 0.0000, -1.2092,  1.2092],
+        [ 1.2092,  0.0000, -1.2092],
+        [-1.2092,  1.2092,  0.0000]])
+tensor([[ 5.8024, -3.2327,  4.1224],
+        [-3.2327,  3.0005, -3.5744],
+        [ 4.1224, -3.5744,  3.0219]])
+tensor([[ 61.1121, -43.1918,  47.9317],
+        [-43.1918,  32.2293, -34.8524],
+        [ 47.9317, -34.8524,  38.9017]])
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.247 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-rotation3d-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../_downloads/e9ecaf5aaa40e6a732cb5c16ec8ce140/rotation3d.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">rotation3d.py</span></code></a></div>
