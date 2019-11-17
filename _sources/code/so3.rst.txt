@@ -129,7 +129,7 @@ Now we are ready to implement the :math:`\exp \left(\theta W\right)`
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.048 seconds)
+   **Total running time of the script:** ( 0 minutes  0.061 seconds)
 
 
 .. _sphx_glr_download_code_so3.py:
