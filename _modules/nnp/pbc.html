@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nnp.pbc &mdash; NNP 0.0.3.dev5+g38d886c documentation</title>
+  <title>nnp.pbc &mdash; NNP 0.0.3.dev6+gcf51397 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.0.3.dev5+g38d886c
+                0.0.3.dev6+gcf51397
               </div>
             
           
@@ -96,8 +96,8 @@
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">SO(3) Lie Group Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api.html#periodic-boundary-conditions">Periodic Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html#molecular-dynamics">Molecular Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html#periodic-boundary-conditions">Periodic Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html#vibrational-analysis">Vibrational Analysis</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Implementation Walkthrough</span></p>
@@ -173,7 +173,7 @@
 <span class="sd">Periodic Boundary Conditions</span>
 <span class="sd">============================</span>
 
-<span class="sd">The module `nnp.pbc` contains tools to deal with periodic boundary conditions.</span>
+<span class="sd">The module ``nnp.pbc`` contains tools to deal with periodic boundary conditions.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="c1">###############################################################################</span>
 <span class="c1"># Let&#39;s first import all the packages we will use:</span>
@@ -182,7 +182,8 @@
 
 
 <span class="c1">###############################################################################</span>
-<span class="c1"># The following function computes the number of repeats required to </span>
+<span class="c1"># The following function computes the number of repeats required to capture</span>
+<span class="c1"># all the neighbor atoms within the cutoff radius</span>
 <div class="viewcode-block" id="num_repeats"><a class="viewcode-back" href="../../api.html#nnp.pbc.num_repeats">[docs]</a><span class="k">def</span> <span class="nf">num_repeats</span><span class="p">(</span><span class="n">cell</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">pbc</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Compute the number of repeats required along each cell vector to make</span>
 <span class="sd">    the original cell and repeated cells together form a large enough box</span>

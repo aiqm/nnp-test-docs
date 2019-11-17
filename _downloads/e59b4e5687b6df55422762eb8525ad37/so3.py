@@ -2,7 +2,7 @@
 SO(3) Lie Group Operations
 ==========================
 
-The module `nnp.so3` contains tools to rotate point clouds in 3D space.
+The module ``nnp.so3`` contains tools to rotate point clouds in 3D space.
 """
 ###############################################################################
 # Let's first import all the packages we will use:

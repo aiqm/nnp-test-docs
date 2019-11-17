@@ -10,7 +10,7 @@
 Periodic Boundary Conditions
 ============================
 
-The module `nnp.pbc` contains tools to deal with periodic boundary conditions.
+The module ``nnp.pbc`` contains tools to deal with periodic boundary conditions.
 
 Let's first import all the packages we will use:
 
@@ -27,7 +27,8 @@ Let's first import all the packages we will use:
 
 
 
-The following function computes the number of repeats required to 
+The following function computes the number of repeats required to capture
+all the neighbor atoms within the cutoff radius
 
 
 .. code-block:: default

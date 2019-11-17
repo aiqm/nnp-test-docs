@@ -2,7 +2,7 @@
 Molecular Dynamics
 ==================
 
-The module `nnp.md` provide tools to run molecular dynamics with a potential
+The module ``nnp.md`` provide tools to run molecular dynamics with a potential
 defined by PyTorch.
 """
 

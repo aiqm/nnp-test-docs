@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>SO(3) Lie Group Operations &mdash; NNP 0.0.3.dev5+g38d886c documentation</title>
+  <title>SO(3) Lie Group Operations &mdash; NNP 0.0.3.dev6+gcf51397 documentation</title>
   
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.0.3.dev5+g38d886c
+                0.0.3.dev6+gcf51397
               </div>
             
           
@@ -98,8 +98,8 @@
 <p class="caption"><span class="caption-text">API</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SO(3) Lie Group Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#periodic-boundary-conditions">Periodic Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#molecular-dynamics">Molecular Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#periodic-boundary-conditions">Periodic Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#vibrational-analysis">Vibrational Analysis</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Implementation Walkthrough</span></p>
@@ -174,7 +174,7 @@
             
   <span class="target" id="module-nnp.so3"></span><div class="section" id="so-3-lie-group-operations">
 <h1>SO(3) Lie Group Operations<a class="headerlink" href="#so-3-lie-group-operations" title="Permalink to this headline">¶</a></h1>
-<p>The module <cite>nnp.so3</cite> contains tools to rotate point clouds in 3D space.</p>
+<p>The module <code class="docutils literal notranslate"><span class="pre">nnp.so3</span></code> contains tools to rotate point clouds in 3D space.</p>
 <dl class="function">
 <dt id="nnp.so3.rotate_along">
 <code class="descclassname">nnp.so3.</code><code class="descname">rotate_along</code><span class="sig-paren">(</span><em>axis: torch.Tensor</em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="_modules/nnp/so3.html#rotate_along"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.so3.rotate_along" title="Permalink to this definition">¶</a></dt>
@@ -194,9 +194,63 @@ or anti-clockwise.</td>
 </dd></dl>
 
 </div>
+<span class="target" id="module-nnp.md"></span><div class="section" id="molecular-dynamics">
+<h1>Molecular Dynamics<a class="headerlink" href="#molecular-dynamics" title="Permalink to this headline">¶</a></h1>
+<p>The module <code class="docutils literal notranslate"><span class="pre">nnp.md</span></code> provide tools to run molecular dynamics with a potential
+defined by PyTorch.</p>
+<dl class="class">
+<dt id="nnp.md.Calculator">
+<em class="property">class </em><code class="descclassname">nnp.md.</code><code class="descname">Calculator</code><span class="sig-paren">(</span><em>func: Callable[[Sequence[str], torch.Tensor, torch.Tensor, torch.Tensor], torch.Tensor], overwrite: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nnp/md.html#Calculator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.md.Calculator" title="Permalink to this definition">¶</a></dt>
+<dd><p>ASE Calculator that wraps a neural network potential</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>func</strong> (<em>callable</em>) – A fucntion that .</li>
+<li><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – After wrapping atoms into central box, whether
+to replace the original positions stored in <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms" title="(in ASE)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ase.Atoms</span></code></a>
+object with the wrapped positions.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="nnp.md.Calculator.calculate">
+<code class="descname">calculate</code><span class="sig-paren">(</span><em>atoms=None, properties=['energy'], system_changes=['positions', 'numbers', 'cell', 'pbc', 'initial_charges', 'initial_magmoms']</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nnp/md.html#Calculator.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.md.Calculator.calculate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do the calculation.</p>
+<dl class="docutils">
+<dt>properties: list of str</dt><dd>List of what needs to be calculated.  Can be any combination
+of ‘energy’, ‘forces’, ‘stress’, ‘dipole’, ‘charges’, ‘magmom’
+and ‘magmoms’.</dd>
+<dt>system_changes: list of str</dt><dd>List of what has changed since last calculation.  Can be
+any combination of these six: ‘positions’, ‘numbers’, ‘cell’,
+‘pbc’, ‘initial_charges’ and ‘initial_magmoms’.</dd>
+</dl>
+<p>Subclasses need to implement this, but can ignore properties
+and system_changes if they want.  Calculated properties should
+be inserted into results dictionary like shown in this dummy
+example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;energy&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s1">&#39;forces&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">),</span> <span class="mi">3</span><span class="p">)),</span>
+                <span class="s1">&#39;stress&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span>
+                <span class="s1">&#39;dipole&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+                <span class="s1">&#39;charges&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">)),</span>
+                <span class="s1">&#39;magmom&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s1">&#39;magmoms&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">))}</span>
+</pre></div>
+</div>
+<p>The subclass implementation should first call this
+implementation to set the atoms attribute.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <span class="target" id="module-nnp.pbc"></span><div class="section" id="periodic-boundary-conditions">
 <h1>Periodic Boundary Conditions<a class="headerlink" href="#periodic-boundary-conditions" title="Permalink to this headline">¶</a></h1>
-<p>The module <cite>nnp.pbc</cite> contains tools to deal with periodic boundary conditions.</p>
+<p>The module <code class="docutils literal notranslate"><span class="pre">nnp.pbc</span></code> contains tools to deal with periodic boundary conditions.</p>
 <dl class="function">
 <dt id="nnp.pbc.map2central">
 <code class="descclassname">nnp.pbc.</code><code class="descname">map2central</code><span class="sig-paren">(</span><em>cell: torch.Tensor</em>, <em>coordinates: torch.Tensor</em>, <em>pbc: torch.Tensor</em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="_modules/nnp/pbc.html#map2central"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.pbc.map2central" title="Permalink to this definition">¶</a></dt>
@@ -255,60 +309,6 @@ of atoms in the ceter cell</p>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-</div>
-<span class="target" id="module-nnp.md"></span><div class="section" id="molecular-dynamics">
-<h1>Molecular Dynamics<a class="headerlink" href="#molecular-dynamics" title="Permalink to this headline">¶</a></h1>
-<p>The module <cite>nnp.md</cite> provide tools to run molecular dynamics with a potential
-defined by PyTorch.</p>
-<dl class="class">
-<dt id="nnp.md.Calculator">
-<em class="property">class </em><code class="descclassname">nnp.md.</code><code class="descname">Calculator</code><span class="sig-paren">(</span><em>func: Callable[[Sequence[str], torch.Tensor, torch.Tensor, torch.Tensor], torch.Tensor], overwrite: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nnp/md.html#Calculator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.md.Calculator" title="Permalink to this definition">¶</a></dt>
-<dd><p>ASE Calculator that wraps a neural network potential</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>func</strong> (<em>callable</em>) – A fucntion that .</li>
-<li><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – After wrapping atoms into central box, whether
-to replace the original positions stored in <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/atoms.html#ase.Atoms" title="(in ASE)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ase.Atoms</span></code></a>
-object with the wrapped positions.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="nnp.md.Calculator.calculate">
-<code class="descname">calculate</code><span class="sig-paren">(</span><em>atoms=None, properties=['energy'], system_changes=['positions', 'numbers', 'cell', 'pbc', 'initial_charges', 'initial_magmoms']</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nnp/md.html#Calculator.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.md.Calculator.calculate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Do the calculation.</p>
-<dl class="docutils">
-<dt>properties: list of str</dt><dd>List of what needs to be calculated.  Can be any combination
-of ‘energy’, ‘forces’, ‘stress’, ‘dipole’, ‘charges’, ‘magmom’
-and ‘magmoms’.</dd>
-<dt>system_changes: list of str</dt><dd>List of what has changed since last calculation.  Can be
-any combination of these six: ‘positions’, ‘numbers’, ‘cell’,
-‘pbc’, ‘initial_charges’ and ‘initial_magmoms’.</dd>
-</dl>
-<p>Subclasses need to implement this, but can ignore properties
-and system_changes if they want.  Calculated properties should
-be inserted into results dictionary like shown in this dummy
-example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;energy&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
-                <span class="s1">&#39;forces&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">),</span> <span class="mi">3</span><span class="p">)),</span>
-                <span class="s1">&#39;stress&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span>
-                <span class="s1">&#39;dipole&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
-                <span class="s1">&#39;charges&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">)),</span>
-                <span class="s1">&#39;magmom&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
-                <span class="s1">&#39;magmoms&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">))}</span>
-</pre></div>
-</div>
-<p>The subclass implementation should first call this
-implementation to set the atoms attribute.</p>
-</dd></dl>
-
 </dd></dl>
 
 </div>

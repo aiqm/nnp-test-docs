@@ -2,7 +2,7 @@
 Periodic Boundary Conditions
 ============================
 
-The module `nnp.pbc` contains tools to deal with periodic boundary conditions.
+The module ``nnp.pbc`` contains tools to deal with periodic boundary conditions.
 """
 ###############################################################################
 # Let's first import all the packages we will use:
@@ -11,7 +11,8 @@ from torch import Tensor
 
 
 ###############################################################################
-# The following function computes the number of repeats required to 
+# The following function computes the number of repeats required to capture
+# all the neighbor atoms within the cutoff radius
 def num_repeats(cell: Tensor, pbc: Tensor, cutoff: float) -> Tensor:
     """Compute the number of repeats required along each cell vector to make
     the original cell and repeated cells together form a large enough box

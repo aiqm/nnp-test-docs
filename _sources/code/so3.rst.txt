@@ -10,7 +10,7 @@
 SO(3) Lie Group Operations
 ==========================
 
-The module `nnp.so3` contains tools to rotate point clouds in 3D space.
+The module ``nnp.so3`` contains tools to rotate point clouds in 3D space.
 
 Let's first import all the packages we will use:
 
@@ -129,7 +129,7 @@ Now we are ready to implement the :math:`\exp \left(\theta W\right)`
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.053 seconds)
+   **Total running time of the script:** ( 0 minutes  0.048 seconds)
 
 
 .. _sphx_glr_download_code_so3.py:
