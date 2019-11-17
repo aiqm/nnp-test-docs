@@ -1,3 +1,5 @@
+.. automodule:: nnp.so3
+    :members:
 .. automodule:: nnp.pbc
     :members:
 .. automodule:: nnp.md

@@ -1,4 +1,4 @@
-Installation
+Introduction
 ============
 
 To install NNP, just do

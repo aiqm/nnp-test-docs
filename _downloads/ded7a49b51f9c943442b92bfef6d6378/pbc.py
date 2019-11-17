@@ -13,8 +13,7 @@ def map2central(cell: Tensor, coordinates: Tensor, pbc: Tensor) -> Tensor:
     """Map atoms outside the unit cell into the cell using PBC.
 
     Arguments:
-        cell (:class:`torch.Tensor`): tensor of shape (3, 3) of the three
-            vectors defining unit cell:
+        cell: tensor of shape (3, 3) of the three vectors defining unit cell:
 
             .. code-block:: python
 
@@ -22,12 +21,11 @@ def map2central(cell: Tensor, coordinates: Tensor, pbc: Tensor) -> Tensor:
                         [x2, y2, z2],
                         [x3, y3, z3]])
 
-        coordinates (:class:`torch.Tensor`): Tensor of shape ``(atoms, 3)``
-            or ``(molecules, atoms, 3)``.
-        pbc (:class:`torch.Tensor`): boolean vector of size 3 storing
-            if pbc is enabled for that direction.
+        coordinates: Tensor of shape ``(atoms, 3)`` or ``(molecules, atoms, 3)``.
+        pbc: boolean vector of size 3 storing if pbc is enabled for that direction.
+
     Returns:
-        :class:`torch.Tensor`: coordinates of atoms mapped back to unit cell.
+        coordinates of atoms mapped back to unit cell.
     """
     # Step 1: convert coordinates from standard cartesian coordinate to unit
     # cell coordinates

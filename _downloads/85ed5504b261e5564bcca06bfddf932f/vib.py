@@ -32,11 +32,13 @@ def hessian(coordinates: Tensor, energies: Optional[Tensor] = None,
         raise ValueError('Energies or forces can not be specified at the same time')
     if forces is None:
         assert energies is not None
-        forces = -torch.autograd.grad(energies.sum(), coordinates, create_graph=True)[0]
+        forces = -torch.autograd.grad(
+            [energies.sum()], [coordinates], create_graph=True)[0]
     flattened_force = forces.flatten(start_dim=1)
     force_components = flattened_force.unbind(dim=1)
     return -torch.stack([
-        torch.autograd.grad(f.sum(), coordinates, retain_graph=True)[0].flatten(start_dim=1)
+        torch.autograd.grad(
+            [f.sum()], [coordinates], retain_graph=True)[0].flatten(start_dim=1)
         for f in force_components
     ], dim=1)
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nnp.pbc &mdash; NNP 0.0.2 documentation</title>
+  <title>nnp.pbc &mdash; NNP 0.0.3.dev2+g74de9cb documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.0.2
+                0.0.3.dev2+g74de9cb
               </div>
             
           
@@ -84,9 +84,9 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p class="caption"><span class="caption-text">Introduction</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../start.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../start.html">Introduction</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Examples</span></p>
 <ul>
@@ -94,12 +94,14 @@
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../api.html">Periodic Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">SO(3) Lie Group Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html#periodic-boundary-conditions">Periodic Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html#molecular-dynamics">Molecular Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html#vibrational-analysis">Vibrational Analysis</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Implementation Walkthrough</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../code/so3.html">SO(3) Lie Group Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../code/pbc.html">Periodic Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../code/md.html">Molecular Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../code/vib.html">Vibrational Analysis</a></li>
@@ -181,8 +183,7 @@
     <span class="sd">&quot;&quot;&quot;Map atoms outside the unit cell into the cell using PBC.</span>
 
 <span class="sd">    Arguments:</span>
-<span class="sd">        cell (:class:`torch.Tensor`): tensor of shape (3, 3) of the three</span>
-<span class="sd">            vectors defining unit cell:</span>
+<span class="sd">        cell: tensor of shape (3, 3) of the three vectors defining unit cell:</span>
 
 <span class="sd">            .. code-block:: python</span>
 
@@ -190,12 +191,11 @@
 <span class="sd">                        [x2, y2, z2],</span>
 <span class="sd">                        [x3, y3, z3]])</span>
 
-<span class="sd">        coordinates (:class:`torch.Tensor`): Tensor of shape ``(atoms, 3)``</span>
-<span class="sd">            or ``(molecules, atoms, 3)``.</span>
-<span class="sd">        pbc (:class:`torch.Tensor`): boolean vector of size 3 storing</span>
-<span class="sd">            if pbc is enabled for that direction.</span>
+<span class="sd">        coordinates: Tensor of shape ``(atoms, 3)`` or ``(molecules, atoms, 3)``.</span>
+<span class="sd">        pbc: boolean vector of size 3 storing if pbc is enabled for that direction.</span>
+
 <span class="sd">    Returns:</span>
-<span class="sd">        :class:`torch.Tensor`: coordinates of atoms mapped back to unit cell.</span>
+<span class="sd">        coordinates of atoms mapped back to unit cell.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Step 1: convert coordinates from standard cartesian coordinate to unit</span>
     <span class="c1"># cell coordinates</span>
