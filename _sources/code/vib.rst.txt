@@ -30,17 +30,16 @@ Vibrational Analysis
         """Compute analytical hessian from the energy graph or force graph.
 
         Arguments:
-            coordinates (:class:`torch.Tensor`): Tensor of shape `(molecules, atoms, 3)` or
-                ``(atoms, 3)``.
-            energies (:class:`torch.Tensor`): Tensor of shape `(molecules,)`, if specified,
-                then `forces` must be `None`. This energies must be computed from
-                `coordinates` in a graph.
-            forces (:class:`torch.Tensor`): Tensor of shape `(molecules, atoms, 3)`, if specified,
+            coordinates: Tensor of shape `(molecules, atoms, 3)` or ``(atoms, 3)``.
+            energies: Tensor of shape `(molecules,)`, if specified, then `forces`
+                must be `None`. This energies must be computed from `coordinates`
+                in a graph.
+            forces: Tensor of shape `(molecules, atoms, 3)`, if specified,
                 then `energies` must be `None`. This forces must be computed from
                 `coordinates` in a graph.
         Returns:
-            :class:`torch.Tensor`: Tensor of shape `(molecules, 3A, 3A)` where A is the number of
-            atoms in each molecule
+            Tensor of shape `(molecules, 3A, 3A)` where A is the number of atoms in
+            each molecule
         """
         if energies is None and forces is None:
             raise ValueError()
@@ -66,7 +65,6 @@ Vibrational Analysis
 
     def vibrational_analysis(masses: Tensor, hessian: Tensor) -> FreqsModes:
         """Computing the vibrational wavenumbers from hessian."""
-        assert hessian.shape[0] == 1, 'Currently only supporting computing one molecule a time'
         # Solving the eigenvalue problem: Hq = w^2 * T q
         # where H is the Hessian matrix, q is the normal coordinates,
         # T = diag(m1, m1, m1, m2, m2, m2, ....) is the mass
@@ -76,8 +74,6 @@ Vibrational Analysis
         # T^(-1/2) H T^(-1/2) q' = w^2 * q'
         inv_sqrt_mass = masses.rsqrt().repeat_interleave(3, dim=1)  # shape (molecule, 3 * atoms)
         mass_scaled_hessian = hessian * inv_sqrt_mass.unsqueeze(1) * inv_sqrt_mass.unsqueeze(2)
-        if mass_scaled_hessian.shape[0] != 1:
-            raise ValueError('The input should contain only one molecule')
         mass_scaled_hessian = mass_scaled_hessian.squeeze(0)
         eigenvalues, eigenvectors = torch.symeig(mass_scaled_hessian, eigenvectors=True)
         angular_frequencies = eigenvalues.sqrt()
@@ -88,7 +84,7 @@ Vibrational Analysis
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.044 seconds)
+   **Total running time of the script:** ( 0 minutes  0.032 seconds)
 
 
 .. _sphx_glr_download_code_vib.py:

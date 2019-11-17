@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Introduction &mdash; NNP 0.0.3.dev2+g74de9cb documentation</title>
+  <title>Introduction &mdash; NNP 0.0.3.dev4+g85dcabb documentation</title>
   
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.0.3.dev2+g74de9cb
+                0.0.3.dev4+g85dcabb
               </div>
             
           
@@ -104,8 +104,8 @@
 <p class="caption"><span class="caption-text">Implementation Walkthrough</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="code/so3.html">SO(3) Lie Group Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="code/pbc.html">Periodic Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code/md.html">Molecular Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code/pbc.html">Periodic Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code/vib.html">Vibrational Analysis</a></li>
 </ul>
 
@@ -173,10 +173,24 @@
             
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>NNP is a python package that provide common tools used wo work with
+neural network potentials with PyTorch. Currently it includes tools
+to deal with periodic boundary condition, rotation in 3D space, analytical
+hessian, vibrational analysis, and molecular dynamics.</p>
 <p>To install NNP, just do</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install nnp
 </pre></div>
 </div>
+<p>TODO:
+- [x] so3
+- [ ] test so3
+- [ ] pbc
+- [ ] test pbc
+- [ ] md
+- [ ] test md: autograd
+- [ ] test md: stress
+- [ ] vib
+- [ ] test vib</p>
 </div>
 
 

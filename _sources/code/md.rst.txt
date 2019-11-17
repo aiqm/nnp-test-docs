@@ -24,9 +24,9 @@ defined by PyTorch.
 
     import torch
     from torch import Tensor
-    import ase.calculators.calculator
     from nnp import pbc
     from typing import Callable, Sequence
+    import ase.calculators.calculator
 
 
     class Calculator(ase.calculators.calculator.Calculator):
@@ -80,7 +80,7 @@ defined by PyTorch.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.045 seconds)
+   **Total running time of the script:** ( 0 minutes  0.036 seconds)
 
 
 .. _sphx_glr_download_code_md.py:

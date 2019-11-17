@@ -8,9 +8,9 @@ defined by PyTorch.
 
 import torch
 from torch import Tensor
-import ase.calculators.calculator
 from nnp import pbc
 from typing import Callable, Sequence
+import ase.calculators.calculator
 
 
 class Calculator(ase.calculators.calculator.Calculator):

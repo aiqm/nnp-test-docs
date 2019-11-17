@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Periodic Boundary Conditions &mdash; NNP 0.0.3.dev2+g74de9cb documentation</title>
+  <title>Periodic Boundary Conditions &mdash; NNP 0.0.3.dev4+g85dcabb documentation</title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Molecular Dynamics" href="md.html" />
-    <link rel="prev" title="SO(3) Lie Group Operations" href="so3.html" /> 
+    <link rel="next" title="Vibrational Analysis" href="vib.html" />
+    <link rel="prev" title="Molecular Dynamics" href="md.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.0.3.dev2+g74de9cb
+                0.0.3.dev4+g85dcabb
               </div>
             
           
@@ -104,8 +104,8 @@
 <p class="caption"><span class="caption-text">Implementation Walkthrough</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="so3.html">SO(3) Lie Group Operations</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Periodic Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="md.html">Molecular Dynamics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Periodic Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vib.html">Vibrational Analysis</a></li>
 </ul>
 
@@ -179,16 +179,46 @@
 </div>
 <div class="sphx-glr-example-title section" id="periodic-boundary-conditions">
 <span id="sphx-glr-code-pbc-py"></span><h1>Periodic Boundary Conditions<a class="headerlink" href="#periodic-boundary-conditions" title="Permalink to this headline">¶</a></h1>
-<p>This file contains</p>
+<p>The module <cite>nnp.pbc</cite> contains tools to deal with periodic boundary conditions.</p>
+<p>Let’s first import all the packages we will use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="k">import</span> <span class="n">Tensor</span>
+</pre></div>
+</div>
+<p>The following function computes the number of repeats required to</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">num_repeats</span><span class="p">(</span><span class="n">cell</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">pbc</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Compute the number of repeats required along each cell vector to make</span>
+<span class="sd">    the original cell and repeated cells together form a large enough box</span>
+<span class="sd">    so that for each atom in the original cell, all its neighbor atoms within</span>
+<span class="sd">    the given cutoff distance are contained in the big box.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        cell: tensor of shape (3, 3) of the three vectors defining unit cell:</span>
+
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                tensor([[x1, y1, z1],</span>
+<span class="sd">                        [x2, y2, z2],</span>
+<span class="sd">                        [x3, y3, z3]])</span>
+
+<span class="sd">        pbc: boolean vector of size 3 storing if pbc is enabled for that direction.</span>
+<span class="sd">        cutoff: the cutoff inside which atoms are considered as pairs</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numbers of repeats required to make the repeated box contains all the neighbors</span>
+<span class="sd">        of atoms in the ceter cell</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">reciprocal_cell</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
+    <span class="n">inv_distances</span> <span class="o">=</span> <span class="n">reciprocal_cell</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">cutoff</span> <span class="o">*</span> <span class="n">inv_distances</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">pbc</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">map2central</span><span class="p">(</span><span class="n">cell</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">pbc</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Map atoms outside the unit cell into the cell using PBC.</span>
 
 <span class="sd">    Arguments:</span>
-<span class="sd">        cell: tensor of shape (3, 3) of the three vectors defining unit cell:</span>
+<span class="sd">        cell: tensor of shape ``(3, 3)`` of the three vectors defining unit cell:</span>
 
 <span class="sd">            .. code-block:: python</span>
 
@@ -213,7 +243,7 @@
     <span class="k">return</span> <span class="n">coordinates_cell</span> <span class="o">@</span> <span class="n">cell</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.045 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.030 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-code-pbc-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../_downloads/ded7a49b51f9c943442b92bfef6d6378/pbc.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">pbc.py</span></code></a></div>
@@ -231,10 +261,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="md.html" class="btn btn-neutral float-right" title="Molecular Dynamics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="vib.html" class="btn btn-neutral float-right" title="Vibrational Analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="so3.html" class="btn btn-neutral float-left" title="SO(3) Lie Group Operations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="md.html" class="btn btn-neutral float-left" title="Molecular Dynamics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

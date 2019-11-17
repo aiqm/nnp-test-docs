@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Molecular Dynamics &mdash; NNP 0.0.3.dev2+g74de9cb documentation</title>
+  <title>Molecular Dynamics &mdash; NNP 0.0.3.dev4+g85dcabb documentation</title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Vibrational Analysis" href="vib.html" />
-    <link rel="prev" title="Periodic Boundary Conditions" href="pbc.html" /> 
+    <link rel="next" title="Periodic Boundary Conditions" href="pbc.html" />
+    <link rel="prev" title="SO(3) Lie Group Operations" href="so3.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.0.3.dev2+g74de9cb
+                0.0.3.dev4+g85dcabb
               </div>
             
           
@@ -104,8 +104,8 @@
 <p class="caption"><span class="caption-text">Implementation Walkthrough</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="so3.html">SO(3) Lie Group Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pbc.html">Periodic Boundary Conditions</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Molecular Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pbc.html">Periodic Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vib.html">Vibrational Analysis</a></li>
 </ul>
 
@@ -183,9 +183,9 @@
 defined by PyTorch.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="k">import</span> <span class="n">Tensor</span>
-<span class="kn">import</span> <span class="nn">ase.calculators.calculator</span>
 <span class="kn">from</span> <span class="nn">nnp</span> <span class="k">import</span> <span class="n">pbc</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="kn">import</span> <span class="nn">ase.calculators.calculator</span>
 
 
 <span class="k">class</span> <span class="nc">Calculator</span><span class="p">(</span><span class="n">ase</span><span class="o">.</span><span class="n">calculators</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">Calculator</span><span class="p">):</span>
@@ -237,7 +237,7 @@ defined by PyTorch.</p>
             <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;stress&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stress</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.045 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.036 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-code-md-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../_downloads/71dba08cf96abb378a7608c23a6e32cc/md.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">md.py</span></code></a></div>
@@ -255,10 +255,10 @@ defined by PyTorch.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="vib.html" class="btn btn-neutral float-right" title="Vibrational Analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="pbc.html" class="btn btn-neutral float-right" title="Periodic Boundary Conditions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="pbc.html" class="btn btn-neutral float-left" title="Periodic Boundary Conditions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="so3.html" class="btn btn-neutral float-left" title="SO(3) Lie Group Operations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nnp.md &mdash; NNP 0.0.3.dev2+g74de9cb documentation</title>
+  <title>nnp.md &mdash; NNP 0.0.3.dev4+g85dcabb documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.0.3.dev2+g74de9cb
+                0.0.3.dev4+g85dcabb
               </div>
             
           
@@ -102,8 +102,8 @@
 <p class="caption"><span class="caption-text">Implementation Walkthrough</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../code/so3.html">SO(3) Lie Group Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../code/pbc.html">Periodic Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../code/md.html">Molecular Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code/pbc.html">Periodic Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../code/vib.html">Vibrational Analysis</a></li>
 </ul>
 
@@ -178,9 +178,9 @@
 
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="k">import</span> <span class="n">Tensor</span>
-<span class="kn">import</span> <span class="nn">ase.calculators.calculator</span>
 <span class="kn">from</span> <span class="nn">nnp</span> <span class="k">import</span> <span class="n">pbc</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="kn">import</span> <span class="nn">ase.calculators.calculator</span>
 
 
 <div class="viewcode-block" id="Calculator"><a class="viewcode-back" href="../../api.html#nnp.md.Calculator">[docs]</a><span class="k">class</span> <span class="nc">Calculator</span><span class="p">(</span><span class="n">ase</span><span class="o">.</span><span class="n">calculators</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">Calculator</span><span class="p">):</span>
