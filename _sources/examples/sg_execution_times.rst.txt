@@ -5,7 +5,7 @@
 
 Computation times
 =================
-**00:57.038** total execution time for **examples** files:
+**00:59.568** total execution time for **examples** files:
 
-- **00:56.744**: :ref:`sphx_glr_examples_planetary_motion.py` (``planetary_motion.py``)
-- **00:00.294**: :ref:`sphx_glr_examples_rotation3d.py` (``rotation3d.py``)
+- **00:59.318**: :ref:`sphx_glr_examples_planetary_motion.py` (``planetary_motion.py``)
+- **00:00.250**: :ref:`sphx_glr_examples_rotation3d.py` (``rotation3d.py``)
