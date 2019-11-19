@@ -230,12 +230,13 @@ the XY plane and if the trajectory is circle:
     ============================= test session starts ==============================
     platform linux -- Python 3.7.5, pytest-5.2.4, py-1.8.0, pluggy-0.13.0
     rootdir: /home/runner/work/nnp/nnp, inifile: setup.cfg
-    collected 3 items
+    collected 4 items
 
-    planetary_motion.py ..                                                   [ 66%]
+    planetary_motion.py ..                                                   [ 50%]
+    rotation3d.py .                                                          [ 75%]
     test_jit.py .                                                            [100%]
 
-    ============================== 3 passed in 27.42s ==============================
+    ============================== 4 passed in 0.06s ===============================
 
 
 
@@ -243,7 +244,7 @@ the XY plane and if the trajectory is circle:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  55.513 seconds)
+   **Total running time of the script:** ( 0 minutes  25.865 seconds)
 
 
 .. _sphx_glr_download_examples_planetary_motion.py:

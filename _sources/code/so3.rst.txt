@@ -18,8 +18,9 @@ Let's first import all the packages we will use:
 .. code-block:: default
 
     import torch
+    from scipy.linalg import expm as scipy_expm
     from torch import Tensor
-    from torch.jit import Final
+    from typing import Tuple
 
 
 
@@ -77,7 +78,7 @@ To implement, let's first define the Levi-Civita symbol:
 
 .. code-block:: default
 
-    levi_civita: Final[Tensor] = torch.zeros(3, 3, 3)
+    levi_civita = torch.zeros(3, 3, 3)
     levi_civita[0, 1, 2] = levi_civita[1, 2, 0] = levi_civita[2, 0, 1] = 1
     levi_civita[0, 2, 1] = levi_civita[2, 1, 0] = levi_civita[1, 0, 2] = -1
 
@@ -99,8 +100,9 @@ PyTorch does not have matrix exp, let's implement it here. See
 .. code-block:: default
 
     def expm(matrix: Tensor) -> Tensor:
-        e, V = torch.symeig(matrix, eigenvectors=True)
-        return V @ torch.diag(e).exp() @ V.t()
+        # TODO: remove this part when pytorch support matrix_exp
+        ndarray = matrix.detach().cpu().numpy()
+        return torch.from_numpy(scipy_expm(ndarray)).to(matrix)
 
 
 
@@ -126,9 +128,7 @@ Now we are ready to implement the :math:`\exp \left(\theta W\right)`
         Return:
             the rotational matrix :math:`\exp{\left(\theta W\right)}`.
         """
-        print(levi_civita)
         W = torch.einsum('ijk,j->ik', levi_civita.to(axis), axis)
-        print(W)
         return expm(W)
 
 

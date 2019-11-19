@@ -7,8 +7,9 @@ The module ``nnp.so3`` contains tools to rotate point clouds in 3D space.
 ###############################################################################
 # Let's first import all the packages we will use:
 import torch
+from scipy.linalg import expm as scipy_expm
 from torch import Tensor
-from torch.jit import Final
+from typing import Tuple
 
 
 ###############################################################################
@@ -56,7 +57,7 @@ from torch.jit import Final
 # after rotating :math:`\theta`.
 #
 # To implement, let's first define the Levi-Civita symbol:
-levi_civita: Final[Tensor] = torch.zeros(3, 3, 3)
+levi_civita = torch.zeros(3, 3, 3)
 levi_civita[0, 1, 2] = levi_civita[1, 2, 0] = levi_civita[2, 0, 1] = 1
 levi_civita[0, 2, 1] = levi_civita[2, 1, 0] = levi_civita[1, 0, 2] = -1
 
@@ -68,8 +69,9 @@ levi_civita[0, 2, 1] = levi_civita[2, 1, 0] = levi_civita[1, 0, 2] = -1
 # .. _Matrix function:
 #   https://en.wikipedia.org/wiki/Matrix_function
 def expm(matrix: Tensor) -> Tensor:
-    e, V = torch.symeig(matrix, eigenvectors=True)
-    return V @ torch.diag(e).exp() @ V.t()
+    # TODO: remove this part when pytorch support matrix_exp
+    ndarray = matrix.detach().cpu().numpy()
+    return torch.from_numpy(scipy_expm(ndarray)).to(matrix)
 
 
 ###############################################################################
@@ -85,7 +87,5 @@ def rotate_along(axis: Tensor) -> Tensor:
     Return:
         the rotational matrix :math:`\exp{\left(\theta W\right)}`.
     """
-    print(levi_civita)
     W = torch.einsum('ijk,j->ik', levi_civita.to(axis), axis)
-    print(W)
     return expm(W)

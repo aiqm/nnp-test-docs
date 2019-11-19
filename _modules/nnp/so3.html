@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nnp.so3 &mdash; NNP 0.0.3.dev8+g212dd0f documentation</title>
+  <title>nnp.so3 &mdash; NNP 0.0.3.dev10+g1957185 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.0.3.dev8+g212dd0f
+                0.0.3.dev10+g1957185
               </div>
             
           
@@ -178,8 +178,9 @@
 <span class="c1">###############################################################################</span>
 <span class="c1"># Let&#39;s first import all the packages we will use:</span>
 <span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="k">import</span> <span class="n">expm</span> <span class="k">as</span> <span class="n">scipy_expm</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="k">import</span> <span class="n">Tensor</span>
-<span class="kn">from</span> <span class="nn">torch.jit</span> <span class="k">import</span> <span class="n">Final</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Tuple</span>
 
 
 <span class="c1">###############################################################################</span>
@@ -227,7 +228,7 @@
 <span class="c1"># after rotating :math:`\theta`.</span>
 <span class="c1">#</span>
 <span class="c1"># To implement, let&#39;s first define the Levi-Civita symbol:</span>
-<span class="n">levi_civita</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">levi_civita</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">levi_civita</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">levi_civita</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">levi_civita</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">levi_civita</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">levi_civita</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">levi_civita</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
@@ -239,8 +240,9 @@
 <span class="c1"># .. _Matrix function:</span>
 <span class="c1">#   https://en.wikipedia.org/wiki/Matrix_function</span>
 <span class="k">def</span> <span class="nf">expm</span><span class="p">(</span><span class="n">matrix</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
-    <span class="n">e</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">symeig</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">eigenvectors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">V</span> <span class="o">@</span> <span class="n">torch</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span> <span class="o">@</span> <span class="n">V</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
+    <span class="c1"># TODO: remove this part when pytorch support matrix_exp</span>
+    <span class="n">ndarray</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">scipy_expm</span><span class="p">(</span><span class="n">ndarray</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
 
 
 <span class="c1">###############################################################################</span>
@@ -256,9 +258,7 @@
 <span class="sd">    Return:</span>
 <span class="sd">        the rotational matrix :math:`\exp{\left(\theta W\right)}`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">levi_civita</span><span class="p">)</span>
     <span class="n">W</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ijk,j-&gt;ik&#39;</span><span class="p">,</span> <span class="n">levi_civita</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">axis</span><span class="p">),</span> <span class="n">axis</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">expm</span><span class="p">(</span><span class="n">W</span><span class="p">)</span></div>
 </pre></div>
 

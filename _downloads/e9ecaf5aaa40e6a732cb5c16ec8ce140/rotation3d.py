@@ -18,20 +18,39 @@ This tutorial demonstrates how rotate a group of points in 3D space.
 # Let's import libraries first
 import math
 import torch
+import pytest
 import nnp.so3 as so3
 
 ###############################################################################
-# Let's first take a look at a special case: rotating ``(1, 0, 0)``, ``(0, 1, 0)``
-# and ``(0, 0, 1)`` along the diagonal for 120 degree, this should permute these
-# points:
+# Let's first take a look at a special case: rotating the three unit vectors
+# ``(1, 0, 0)``, ``(0, 1, 0)`` and ``(0, 0, 1)`` along the diagonal for 120
+# degree, this should permute these points:
+rx = torch.tensor([1, 0, 0])
+ry = torch.tensor([0, 1, 0])
+rz = torch.tensor([0, 0, 1])
+points = torch.stack([rx, ry, rz])
+
+###############################################################################
+# Now let's compute the rotation matrix
 axis = torch.ones(3) / math.sqrt(3) * (math.pi * 2 / 3)
 R = so3.rotate_along(axis)
-points = torch.tensor([
-    [1, 0, 0],
-    [0, 1, 0],
-    [0, 0, 1],
-], dtype=torch.float)
-rotated = R @ points
-print(R)
 
-print(R.t() @ R)
+###############################################################################
+# Note that we need to do matrix-vector product for all these unit vectors
+# so we need to do a transpose in order to use ``@`` operator.
+rotated = (R @ points.float().t()).t()
+print(rotated)
+
+
+###############################################################################
+# After this rotation, the three vector permutes: rx->ry, ry->rz, rz->rx. Let's
+# programmically check that. This check will be run by pytest later.
+def test_rotated_unit_vectors():
+    expected = torch.stack([ry, rz, rx]).float()
+    assert torch.allclose(rotated, expected)
+
+
+###############################################################################
+# Now let's run all the tests
+if __name__ == '__main__':
+    pytest.main()
