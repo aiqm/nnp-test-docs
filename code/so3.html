@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>SO(3) Lie Group Operations &mdash; NNP 0.0.3.dev10+g1957185 documentation</title>
+  <title>SO(3) Lie Group Operations &mdash; NNP 0.0.3.dev1+gc87a467 documentation</title>
   
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.0.3.dev10+g1957185
+                0.0.3.dev1+gc87a467
               </div>
             
           
@@ -185,7 +185,6 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="k">import</span> <a href="https://docs.python.org/3/library/functions.html#object" title="View documentation for builtins.object"><span class="n">expm</span></a> <span class="k">as</span> <span class="n">scipy_expm</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="k">import</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">Tensor</span></a>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Tuple</span>
 </pre></div>
 </div>
 <p>The following function implements rotation along an axis passing the origin.
@@ -224,8 +223,7 @@ after rotating <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
 <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">levi_civita</span></a><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">levi_civita</span></a><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">levi_civita</span></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 </pre></div>
 </div>
-<p>PyTorch does not have matrix exp, let’s implement it here. See
-<a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_function">Matrix function</a> for details.</p>
+<p>PyTorch does not have matrix exp, let’s implement it here using scipy</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">expm</span><span class="p">(</span><span class="n">matrix</span><span class="p">:</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">Tensor</span></a><span class="p">)</span> <span class="o">-&gt;</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">Tensor</span></a><span class="p">:</span>
     <span class="c1"># TODO: remove this part when pytorch support matrix_exp</span>
     <span class="n">ndarray</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>

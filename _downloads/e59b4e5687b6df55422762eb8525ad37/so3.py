@@ -9,7 +9,6 @@ The module ``nnp.so3`` contains tools to rotate point clouds in 3D space.
 import torch
 from scipy.linalg import expm as scipy_expm
 from torch import Tensor
-from typing import Tuple
 
 
 ###############################################################################
@@ -63,11 +62,7 @@ levi_civita[0, 2, 1] = levi_civita[2, 1, 0] = levi_civita[1, 0, 2] = -1
 
 
 ###############################################################################
-# PyTorch does not have matrix exp, let's implement it here. See
-# `Matrix function`_ for details.
-#
-# .. _Matrix function:
-#   https://en.wikipedia.org/wiki/Matrix_function
+# PyTorch does not have matrix exp, let's implement it here using scipy
 def expm(matrix: Tensor) -> Tensor:
     # TODO: remove this part when pytorch support matrix_exp
     ndarray = matrix.detach().cpu().numpy()

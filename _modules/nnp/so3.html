@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nnp.so3 &mdash; NNP 0.0.3.dev10+g1957185 documentation</title>
+  <title>nnp.so3 &mdash; NNP 0.0.3.dev1+gc87a467 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.0.3.dev10+g1957185
+                0.0.3.dev1+gc87a467
               </div>
             
           
@@ -180,7 +180,6 @@
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="k">import</span> <span class="n">expm</span> <span class="k">as</span> <span class="n">scipy_expm</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="k">import</span> <span class="n">Tensor</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Tuple</span>
 
 
 <span class="c1">###############################################################################</span>
@@ -234,11 +233,7 @@
 
 
 <span class="c1">###############################################################################</span>
-<span class="c1"># PyTorch does not have matrix exp, let&#39;s implement it here. See</span>
-<span class="c1"># `Matrix function`_ for details.</span>
-<span class="c1">#</span>
-<span class="c1"># .. _Matrix function:</span>
-<span class="c1">#   https://en.wikipedia.org/wiki/Matrix_function</span>
+<span class="c1"># PyTorch does not have matrix exp, let&#39;s implement it here using scipy</span>
 <span class="k">def</span> <span class="nf">expm</span><span class="p">(</span><span class="n">matrix</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
     <span class="c1"># TODO: remove this part when pytorch support matrix_exp</span>
     <span class="n">ndarray</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>

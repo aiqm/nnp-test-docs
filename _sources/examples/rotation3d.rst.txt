@@ -30,6 +30,7 @@ Let's import libraries first
     import math
     import torch
     import pytest
+    import sys
     import nnp.so3 as so3
 
 
@@ -124,7 +125,8 @@ Now let's run all the tests
 .. code-block:: default
 
     if __name__ == '__main__':
-        pytest.main()
+        pytest.main([sys.argv[0]])
+
 
 
 
@@ -137,13 +139,11 @@ Now let's run all the tests
     ============================= test session starts ==============================
     platform linux -- Python 3.6.9, pytest-5.2.4, py-1.8.0, pluggy-0.13.0
     rootdir: /home/runner/work/nnp/nnp, inifile: setup.cfg
-    collected 4 items
+    collected 1 item
 
-    planetary_motion.py ..                                                   [ 50%]
-    rotation3d.py .                                                          [ 75%]
-    test_jit.py .                                                            [100%]
+    rotation3d.py .                                                          [100%]
 
-    ============================== 4 passed in 30.60s ==============================
+    ============================== 1 passed in 0.02s ===============================
 
 
 
@@ -151,7 +151,7 @@ Now let's run all the tests
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  31.181 seconds)
+   **Total running time of the script:** ( 0 minutes  0.576 seconds)
 
 
 .. _sphx_glr_download_examples_rotation3d.py:

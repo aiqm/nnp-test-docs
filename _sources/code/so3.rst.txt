@@ -20,7 +20,6 @@ Let's first import all the packages we will use:
     import torch
     from scipy.linalg import expm as scipy_expm
     from torch import Tensor
-    from typing import Tuple
 
 
 
@@ -90,11 +89,7 @@ To implement, let's first define the Levi-Civita symbol:
 
 
 
-PyTorch does not have matrix exp, let's implement it here. See
-`Matrix function`_ for details.
-
-.. _Matrix function:
-  https://en.wikipedia.org/wiki/Matrix_function
+PyTorch does not have matrix exp, let's implement it here using scipy
 
 
 .. code-block:: default

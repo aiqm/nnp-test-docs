@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Use ASE to Simulate Planetary Motion &mdash; NNP 0.0.3.dev10+g1957185 documentation</title>
+  <title>Use ASE to Simulate Planetary Motion &mdash; NNP 0.0.3.dev1+gc87a467 documentation</title>
   
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.0.3.dev10+g1957185
+                0.0.3.dev1+gc87a467
               </div>
             
           
@@ -194,6 +194,7 @@ between these two atoms.</p>
 <span class="kn">from</span> <span class="nn">ase.md.verlet</span> <span class="k">import</span> <a href="https://wiki.fysik.dtu.dk/ase/ase/md.html#ase.md.verlet.VelocityVerlet" title="View documentation for ase.md.verlet.VelocityVerlet"><span class="n">VelocityVerlet</span></a>
 <span class="kn">import</span> <span class="nn">nnp.md</span> <span class="k">as</span> <span class="nn">md</span>
 <span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
@@ -275,7 +276,7 @@ It is not hard to get that, the velocity is <span class="math notranslate nohigh
 </div>
 <img alt="../_images/sphx_glr_planetary_motion_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_planetary_motion_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/runner/work/nnp/nnp/tests/planetary_motion.py:99: MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes currently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance.
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/runner/work/nnp/nnp/tests/planetary_motion.py:100: MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes currently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance.
   plt.axes().set_aspect(&#39;equal&#39;)
 </pre></div>
 </div>
@@ -294,23 +295,21 @@ the XY plane and if the trajectory is circle:</p>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+    <span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><a href="https://docs.python.org/3/library/sys.html#sys.argv" title="View documentation for sys.argv"><span class="n">sys</span><span class="o">.</span><span class="n">argv</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>============================= test session starts ==============================
 platform linux -- Python 3.6.9, pytest-5.2.4, py-1.8.0, pluggy-0.13.0
 rootdir: /home/runner/work/nnp/nnp, inifile: setup.cfg
-collected 4 items
+collected 2 items
 
-planetary_motion.py ..                                                   [ 50%]
-rotation3d.py .                                                          [ 75%]
-test_jit.py .                                                            [100%]
+planetary_motion.py ..                                                   [100%]
 
-============================== 4 passed in 0.09s ===============================
+============================== 2 passed in 24.48s ==============================
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  31.100 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  49.612 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-planetary-motion-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../_downloads/962751cb3db10855c33516fa378f6cb3/planetary_motion.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">planetary_motion.py</span></code></a></div>

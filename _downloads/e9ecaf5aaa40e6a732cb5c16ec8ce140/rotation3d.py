@@ -19,6 +19,7 @@ This tutorial demonstrates how rotate a group of points in 3D space.
 import math
 import torch
 import pytest
+import sys
 import nnp.so3 as so3
 
 ###############################################################################
@@ -53,4 +54,4 @@ def test_rotated_unit_vectors():
 ###############################################################################
 # Now let's run all the tests
 if __name__ == '__main__':
-    pytest.main()
+    pytest.main([sys.argv[0]])
