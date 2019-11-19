@@ -48,7 +48,7 @@ print(rotated)
 # programmically check that. This check will be run by pytest later.
 def test_rotated_unit_vectors():
     expected = torch.stack([ry, rz, rx]).float()
-    assert torch.allclose(rotated, expected)
+    assert torch.allclose(rotated, expected, atol=1e-5)
 
 
 ###############################################################################

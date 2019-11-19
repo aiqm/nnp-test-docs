@@ -14,8 +14,8 @@ To install NNP, just do
 
 
 TODO:
-- [ ] so3
-- [ ] test so3
+- [x] so3
+- [x] test so3
 - [ ] pbc
 - [ ] test pbc
 - [ ] md
