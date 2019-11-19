@@ -28,6 +28,7 @@ Let's first import all the packages we will use:
 
 
 
+
 The following function implements rotation along an axis passing the origin.
 Rotation in 3D is not as trivial as in 2D. Here we start from the equation of
 motion. Let :math:`\vec{n}` be the unit vector pointing to
@@ -87,6 +88,7 @@ To implement, let's first define the Levi-Civita symbol:
 
 
 
+
 PyTorch does not have matrix exp, let's implement it here. See
 `Matrix function`_ for details.
 
@@ -99,6 +101,7 @@ PyTorch does not have matrix exp, let's implement it here. See
     def expm(matrix: Tensor) -> Tensor:
         e, V = torch.symeig(matrix, eigenvectors=True)
         return V @ torch.diag(e).exp() @ V.t()
+
 
 
 
@@ -134,9 +137,10 @@ Now we are ready to implement the :math:`\exp \left(\theta W\right)`
 
 
 
+
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.050 seconds)
+   **Total running time of the script:** ( 0 minutes  0.001 seconds)
 
 
 .. _sphx_glr_download_code_so3.py:

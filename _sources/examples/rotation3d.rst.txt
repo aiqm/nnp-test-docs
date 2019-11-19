@@ -37,6 +37,7 @@ Let's import libraries first
 
 
 
+
 Let's first take a look at a special case: rotating ``(1, 0, 0)``, ``(0, 1, 0)``
 and ``(0, 0, 1)`` along the diagonal for 120 degree, this should permute these
 points:
@@ -89,9 +90,10 @@ points:
 
 
 
+
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.409 seconds)
+   **Total running time of the script:** ( 0 minutes  0.195 seconds)
 
 
 .. _sphx_glr_download_examples_rotation3d.py:

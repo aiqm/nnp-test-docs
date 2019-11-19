@@ -42,6 +42,7 @@ Let's first import all the packages we will use:
 
 
 
+
 The module `nnp.md` provide tools to run molecular dynamics with a potential
 defined by PyTorch. To define the potential we need to provide a function that
 takes the chemical symbols, atom coordinates, unit cell, and PBC flag as an input
@@ -75,12 +76,14 @@ and :math:`r` in Angstrom.
 
 
 
+
 with this potential, we could define an ASE calculator:
 
 
 .. code-block:: default
 
     calculator = md.Calculator(gravity)
+
 
 
 
@@ -101,6 +104,7 @@ Now let's create two atoms, initially at (1, 0, 0) and (2, 0, 0)
 
 
 
+
 For the purpose of demonstration, we make these two atoms's trajector a perfect
 circle at the XY plane. To do so, we need to carefully set the initial velocity.
 It is not hard to get that, the velocity is :math:`v = \sqrt{\frac{GM}{r}}`.
@@ -110,6 +114,7 @@ It is not hard to get that, the velocity is :math:`v = \sqrt{\frac{GM}{r}}`.
 
     planets.set_velocities([[0, 1, 0], [0, 1 / math.sqrt(2), 0]])
     planets.set_calculator(calculator)
+
 
 
 
@@ -148,6 +153,15 @@ Now we can start the dynamics:
 
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    True
+
 
 
 Now let's plot the trajectory to see what we get:
@@ -182,6 +196,7 @@ Now let's plot the trajectory to see what we get:
 
 
 
+
 To check the correctness of this dynamics, we use pytest to test if it is on
 the XY plane and if the trajectory is circle:
 
@@ -213,21 +228,22 @@ the XY plane and if the trajectory is circle:
  .. code-block:: none
 
     ============================= test session starts ==============================
-    platform linux -- Python 3.7.5, pytest-5.2.4, py-1.8.0, pluggy-0.13.0
+    platform linux -- Python 3.6.9, pytest-5.2.4, py-1.8.0, pluggy-0.13.0
     rootdir: /home/runner/work/nnp/nnp, inifile: setup.cfg
     collected 3 items
 
     planetary_motion.py ..                                                   [ 66%]
     test_jit.py .                                                            [100%]
 
-    ============================== 3 passed in 26.86s ==============================
+    ============================== 3 passed in 24.98s ==============================
+
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  54.417 seconds)
+   **Total running time of the script:** ( 0 minutes  50.104 seconds)
 
 
 .. _sphx_glr_download_examples_planetary_motion.py:
