@@ -135,7 +135,7 @@ Now let's run all the tests
  .. code-block:: none
 
     ============================= test session starts ==============================
-    platform linux -- Python 3.7.5, pytest-5.2.4, py-1.8.0, pluggy-0.13.0
+    platform linux -- Python 3.6.9, pytest-5.2.4, py-1.8.0, pluggy-0.13.0
     rootdir: /home/runner/work/nnp/nnp, inifile: setup.cfg
     collected 4 items
 
@@ -143,7 +143,7 @@ Now let's run all the tests
     rotation3d.py .                                                          [ 75%]
     test_jit.py .                                                            [100%]
 
-    ============================== 4 passed in 25.81s ==============================
+    ============================== 4 passed in 30.60s ==============================
 
 
 
@@ -151,7 +151,7 @@ Now let's run all the tests
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  26.293 seconds)
+   **Total running time of the script:** ( 0 minutes  31.181 seconds)
 
 
 .. _sphx_glr_download_examples_rotation3d.py:
