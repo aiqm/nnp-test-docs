@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Use ASE to Simulate Planetary Motion &mdash; NNP 0.0.4.dev2+g632eed5 documentation</title>
+  <title>Use ASE to Simulate Planetary Motion &mdash; NNP 0.0.4.dev3+g1a9c400 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="SO(3) Lie Group Operations" href="../api.html" />
-    <link rel="prev" title="Rotation in 3D Space" href="rotation3d.html" /> 
+    <link rel="prev" title="Analytical Hessians and Vibrational Analysis" href="vibration.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.0.4.dev2+g632eed5
+                0.0.4.dev3+g1a9c400
               </div>
             
           
@@ -93,6 +93,7 @@
 <p class="caption"><span class="caption-text">Examples</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="rotation3d.html">Rotation in 3D Space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vibration.html">Analytical Hessians and Vibrational Analysis</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Use ASE to Simulate Planetary Motion</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
@@ -295,21 +296,23 @@ the XY plane and if the trajectory is circle:</p>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><a href="https://docs.python.org/3/library/sys.html#sys.argv" title="View documentation for sys.argv"><span class="n">sys</span><span class="o">.</span><span class="n">argv</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+    <span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><a href="https://docs.python.org/3/library/sys.html#sys.argv" title="View documentation for sys.argv"><span class="n">sys</span><span class="o">.</span><span class="n">argv</span></a><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;-v&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>============================= test session starts ==============================
-platform linux -- Python 3.6.9, pytest-5.3.0, py-1.8.0, pluggy-0.13.1
+platform linux -- Python 3.7.5, pytest-5.3.0, py-1.8.0, pluggy-0.13.1 -- /opt/hostedtoolcache/Python/3.7.5/x64/bin/python
+cachedir: .pytest_cache
 rootdir: /home/runner/work/nnp/nnp, inifile: setup.cfg
-collected 2 items
+collecting ... collected 2 items
 
-planetary_motion.py ..                                                   [100%]
+planetary_motion.py::test_is_on_xy_plan PASSED                           [ 50%]
+planetary_motion.py::test_is_circle PASSED                               [100%]
 
-============================== 2 passed in 27.92s ==============================
+============================== 2 passed in 28.82s ==============================
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  56.344 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  58.388 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-planetary-motion-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../_downloads/962751cb3db10855c33516fa378f6cb3/planetary_motion.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">planetary_motion.py</span></code></a></div>
@@ -330,7 +333,7 @@ planetary_motion.py ..                                                   [100%]
         <a href="../api.html" class="btn btn-neutral float-right" title="SO(3) Lie Group Operations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="rotation3d.html" class="btn btn-neutral float-left" title="Rotation in 3D Space" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="vibration.html" class="btn btn-neutral float-left" title="Analytical Hessians and Vibrational Analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
