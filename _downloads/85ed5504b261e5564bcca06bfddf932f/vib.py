@@ -10,7 +10,6 @@ and do vibrational analysis.
 import torch
 from torch import Tensor
 from typing import NamedTuple, Optional
-import math
 
 
 ###############################################################################

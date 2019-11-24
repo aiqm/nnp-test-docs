@@ -21,7 +21,6 @@ Let's first import all the packages we will use:
     import torch
     from torch import Tensor
     from typing import NamedTuple, Optional
-    import math
 
 
 
@@ -171,7 +170,7 @@ this is a regular eigen problem
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.003 seconds)
+   **Total running time of the script:** ( 0 minutes  0.002 seconds)
 
 
 .. _sphx_glr_download_code_vib.py:
