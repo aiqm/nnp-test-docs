@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Analytical Hessians and Vibrational Analysis &mdash; NNP 0.0.4.dev3+g1a9c400 documentation</title>
+  <title>Analytical Hessians and Vibrational Analysis &mdash; NNP 0.0.4.dev4+g945bd15 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Use ASE to Simulate Planetary Motion" href="planetary_motion.html" />
-    <link rel="prev" title="Rotation in 3D Space" href="rotation3d.html" /> 
+    <link rel="next" title="SO(3) Lie Group Operations" href="../api.html" />
+    <link rel="prev" title="Use ASE to Simulate Planetary Motion" href="planetary_motion.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.0.4.dev3+g1a9c400
+                0.0.4.dev4+g945bd15
               </div>
             
           
@@ -93,8 +93,12 @@
 <p class="caption"><span class="caption-text">Examples</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="rotation3d.html">Rotation in 3D Space</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Analytical Hessians and Vibrational Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="planetary_motion.html">Use ASE to Simulate Planetary Motion</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Analytical Hessians and Vibrational Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#analytical-hessian">Analytical Hessian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vibrational-analysis">Vibrational Analysis</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
@@ -187,6 +191,7 @@ vibrational analysis using <code class="docutils literal notranslate"><span clas
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">pytest</span> <span class="k">import</span> <span class="n">approx</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">nnp.so3</span> <span class="k">as</span> <span class="nn">so3</span>
 <span class="kn">import</span> <span class="nn">nnp.vib</span> <span class="k">as</span> <span class="nn">vib</span>
@@ -217,6 +222,8 @@ coordinates has shape <cite>(molecules, atoms, 3)</cite>):</p>
     <span class="k">return</span> <a href="https://docs.python.org/3/library/functions.html#object" title="View documentation for builtins.object"><span class="n">naive_potential</span></a><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="section" id="analytical-hessian">
+<h2>Analytical Hessian<a class="headerlink" href="#analytical-hessian" title="Permalink to this headline">¶</a></h2>
 <p>Now let’s compute the hessian one molecule containing two atoms at the origin</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">coordinates</span></a> <span class="o">=</span> <a href="https://pytorch.org/docs/master/torch.html#torch.zeros" title="View documentation for torch.zeros"><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">energy</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/functions.html#object" title="View documentation for builtins.object"><span class="n">potential</span></a><span class="p">(</span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">coordinates</span></a><span class="p">)</span>
@@ -276,6 +283,289 @@ only the contribution from x,y plane, it can be written as:</p>
     <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">hessian01</span><span class="p">,</span> <a href="https://pytorch.org/docs/master/torch.html#torch.zeros" title="View documentation for torch.zeros"><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
+<p>We also support compute multiple molecules in batch</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">coordinates_batch</span></a> <span class="o">=</span> <a href="https://pytorch.org/docs/master/torch.html#torch.zeros" title="View documentation for torch.zeros"><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">energy_batch</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/functions.html#object" title="View documentation for builtins.object"><span class="n">potential</span></a><span class="p">(</span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">coordinates_batch</span></a><span class="p">)</span>
+<a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">hessian_batch</span></a> <span class="o">=</span> <span class="n">vib</span><span class="o">.</span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">hessian</span></a><span class="p">(</span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">coordinates_batch</span></a><span class="p">,</span> <span class="n">energies</span><span class="o">=</span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">energy_batch</span></a><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">hessian_batch</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>tensor([[[ 0.7500, -0.2500, -0.0000, -0.0000, -0.0000, -0.0000],
+         [-0.2500,  0.7500, -0.0000, -0.0000, -0.0000, -0.0000],
+         [-0.0000, -0.0000,  2.0000, -0.0000, -0.0000, -0.0000],
+         [-0.0000, -0.0000, -0.0000,  0.7500, -0.2500, -0.0000],
+         [-0.0000, -0.0000, -0.0000, -0.2500,  0.7500, -0.0000],
+         [-0.0000, -0.0000, -0.0000, -0.0000, -0.0000,  2.0000]],
+
+        [[ 0.7500, -0.2500, -0.0000, -0.0000, -0.0000, -0.0000],
+         [-0.2500,  0.7500, -0.0000, -0.0000, -0.0000, -0.0000],
+         [-0.0000, -0.0000,  2.0000, -0.0000, -0.0000, -0.0000],
+         [-0.0000, -0.0000, -0.0000,  0.7500, -0.2500, -0.0000],
+         [-0.0000, -0.0000, -0.0000, -0.2500,  0.7500, -0.0000],
+         [-0.0000, -0.0000, -0.0000, -0.0000, -0.0000,  2.0000]]])
+</pre></div>
+</div>
+<p>The hessian should be just the stack of the previous results twice</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_analytical_hessian_batch</span><span class="p">():</span>
+    <span class="n">expected</span> <span class="o">=</span> <a href="https://pytorch.org/docs/master/torch.html#torch.stack" title="View documentation for torch.stack"><span class="n">torch</span><span class="o">.</span><span class="n">stack</span></a><span class="p">([</span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">hessian</span></a><span class="p">,</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">hessian</span></a><span class="p">])</span>
+    <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">hessian_batch</span></a><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="vibrational-analysis">
+<h2>Vibrational Analysis<a class="headerlink" href="#vibrational-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Now let’s do vibrational analysis using the computed hessians. Let’s assume
+the two atoms has mass (1, 3). The hessian should have shape <cite>(3 * atoms, 3 * atoms)</cite>,
+the mass should have shape <cite>(atoms,)</cite></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">mass</span></a> <span class="o">=</span> <a href="https://pytorch.org/docs/master/torch.html#torch.tensor" title="View documentation for torch.tensor"><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span></a><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="n">freq_modes1</span> <span class="o">=</span> <span class="n">vib</span><span class="o">.</span><span class="n">vibrational_analysis</span><span class="p">(</span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">mass</span></a><span class="p">,</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">hessian</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output angular frequencies should have shape <cite>(modes,)</cite>, while the modes
+have shape <cite>(modes, atoms, 3)</cite>, where the modes dimension correspond to different
+vibrational modes</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">freq_modes1</span><span class="o">.</span><span class="n">angular_frequencies</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">freq_modes1</span><span class="o">.</span><span class="n">angular_frequencies</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">freq_modes1</span><span class="o">.</span><span class="n">modes</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">freq_modes1</span><span class="o">.</span><span class="n">modes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>torch.Size([6])
+tensor([0.4082, 0.5774, 0.7071, 0.8165, 1.0000, 1.4142])
+torch.Size([6, 2, 3])
+tensor([[[-0.0000, -0.0000, -0.0000],
+         [-0.4082, -0.4082, -0.0000]],
+
+        [[ 0.0000,  0.0000,  0.0000],
+         [-0.4082,  0.4082,  0.0000]],
+
+        [[-0.7071, -0.7071, -0.0000],
+         [-0.0000, -0.0000, -0.0000]],
+
+        [[ 0.0000,  0.0000,  0.0000],
+         [ 0.0000,  0.0000,  0.5774]],
+
+        [[-0.7071,  0.7071,  0.0000],
+         [ 0.0000,  0.0000,  0.0000]],
+
+        [[ 0.0000,  0.0000,  1.0000],
+         [ 0.0000,  0.0000,  0.0000]]])
+</pre></div>
+</div>
+<p>The angular frequency of a harmonic oscillator is given by <span class="math notranslate nohighlight">\(\sqrt{\frac{k}{m}}\)</span>.
+For this example, the two atoms are independent, therefore the normal modes would
+have one atom moving while the other static. The angular frequencies are also
+independent to each other. Therefore, we expect to see the following combinations
+of angular frequencies and normal modes:</p>
+<table border="1" class="docutils align-default">
+<colgroup>
+<col width="54%" />
+<col width="25%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Angular Frequency</th>
+<th class="head">Moving Atom</th>
+<th class="head">Direction</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2}}\)</span></td>
+<td>1</td>
+<td>(x, y)</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(1\)</span></td>
+<td>1</td>
+<td>(x, -y)</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\sqrt{2}\)</span></td>
+<td>1</td>
+<td>z</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\frac{1}{\sqrt{6}}\)</span></td>
+<td>2</td>
+<td>(x, y)</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\frac{1}{\sqrt{3}}\)</span></td>
+<td>2</td>
+<td>(x, -y)</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\sqrt{\frac{2}{3}}\)</span></td>
+<td>2</td>
+<td>z</td>
+</tr>
+</tbody>
+</table>
+<p>Now let’s write a test function to test this case</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_vibrational_analysis</span><span class="p">():</span>
+    <span class="n">expected_freqs</span> <span class="o">=</span> <a href="https://pytorch.org/docs/master/torch.html#torch.tensor" title="View documentation for torch.tensor"><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span></a><span class="p">([</span>
+        <span class="mi">1</span> <span class="o">/</span> <a href="https://docs.python.org/3/library/math.html#math.sqrt" title="View documentation for math.sqrt"><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="mi">1</span> <span class="o">/</span> <a href="https://docs.python.org/3/library/math.html#math.sqrt" title="View documentation for math.sqrt"><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">1</span> <span class="o">/</span> <a href="https://docs.python.org/3/library/math.html#math.sqrt" title="View documentation for math.sqrt"><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+        <a href="https://docs.python.org/3/library/math.html#math.sqrt" title="View documentation for math.sqrt"><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <a href="https://docs.python.org/3/library/math.html#math.sqrt" title="View documentation for math.sqrt"><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><span class="mi">2</span><span class="p">)])</span>
+    <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">freq_modes1</span><span class="o">.</span><span class="n">angular_frequencies</span><span class="p">,</span> <span class="n">expected_freqs</span><span class="p">)</span>
+
+    <span class="n">mode0</span> <span class="o">=</span> <span class="n">freq_modes1</span><span class="o">.</span><span class="n">modes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">atom0</span><span class="p">,</span> <span class="n">atom1</span> <span class="o">=</span> <span class="n">mode0</span>
+    <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">atom0</span><span class="p">,</span> <a href="https://pytorch.org/docs/master/torch.html#torch.zeros" title="View documentation for torch.zeros"><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">atom1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">==</span> <span class="n">approx</span><span class="p">(</span><span class="n">atom1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+    <span class="k">assert</span> <span class="n">atom1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">==</span> <span class="n">approx</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">mode1</span> <span class="o">=</span> <span class="n">freq_modes1</span><span class="o">.</span><span class="n">modes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">atom0</span><span class="p">,</span> <span class="n">atom1</span> <span class="o">=</span> <span class="n">mode1</span>
+    <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">atom0</span><span class="p">,</span> <a href="https://pytorch.org/docs/master/torch.html#torch.zeros" title="View documentation for torch.zeros"><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">atom1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">==</span> <span class="n">approx</span><span class="p">(</span><span class="o">-</span><span class="n">atom1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+    <span class="k">assert</span> <span class="n">atom1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">==</span> <span class="n">approx</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">mode2</span> <span class="o">=</span> <span class="n">freq_modes1</span><span class="o">.</span><span class="n">modes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">atom0</span><span class="p">,</span> <span class="n">atom1</span> <span class="o">=</span> <span class="n">mode2</span>
+    <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <a href="https://pytorch.org/docs/master/torch.html#torch.zeros" title="View documentation for torch.zeros"><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">atom0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">==</span> <span class="n">approx</span><span class="p">(</span><span class="n">atom0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+    <span class="k">assert</span> <span class="n">atom0</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">==</span> <span class="n">approx</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">mode3</span> <span class="o">=</span> <span class="n">freq_modes1</span><span class="o">.</span><span class="n">modes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">atom0</span><span class="p">,</span> <span class="n">atom1</span> <span class="o">=</span> <span class="n">mode3</span>
+    <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">atom0</span><span class="p">,</span> <a href="https://pytorch.org/docs/master/torch.html#torch.zeros" title="View documentation for torch.zeros"><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+    <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">atom1</span><span class="p">[:</span><span class="mi">1</span><span class="p">],</span> <a href="https://pytorch.org/docs/master/torch.html#torch.zeros" title="View documentation for torch.zeros"><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">atom1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">1e-3</span>
+
+    <span class="n">mode4</span> <span class="o">=</span> <span class="n">freq_modes1</span><span class="o">.</span><span class="n">modes</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">atom0</span><span class="p">,</span> <span class="n">atom1</span> <span class="o">=</span> <span class="n">mode4</span>
+    <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <a href="https://pytorch.org/docs/master/torch.html#torch.zeros" title="View documentation for torch.zeros"><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">atom0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">==</span> <span class="n">approx</span><span class="p">(</span><span class="o">-</span><span class="n">atom0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+    <span class="k">assert</span> <span class="n">atom0</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">==</span> <span class="n">approx</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">mode5</span> <span class="o">=</span> <span class="n">freq_modes1</span><span class="o">.</span><span class="n">modes</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+    <span class="n">atom0</span><span class="p">,</span> <span class="n">atom1</span> <span class="o">=</span> <span class="n">mode5</span>
+    <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <a href="https://pytorch.org/docs/master/torch.html#torch.zeros" title="View documentation for torch.zeros"><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+    <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">atom0</span><span class="p">[:</span><span class="mi">1</span><span class="p">],</span> <a href="https://pytorch.org/docs/master/torch.html#torch.zeros" title="View documentation for torch.zeros"><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">atom0</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">1e-3</span>
+</pre></div>
+</div>
+<p>We also support doing vibrational analysis in batch. In case of batch, the
+hessian should have shape <cite>(molecules, 3 * atoms, 3 * atoms)</cite>, and the mass
+should have shape <cite>(molecules, atoms)</cite>. The resulting tensors is just a stack
+of tensors for the single molecule case.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">mass_batch</span></a> <span class="o">=</span> <a href="https://pytorch.org/docs/master/torch.html#torch.stack" title="View documentation for torch.stack"><span class="n">torch</span><span class="o">.</span><span class="n">stack</span></a><span class="p">([</span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">mass</span></a><span class="p">,</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">mass</span></a><span class="p">])</span>
+<span class="n">freq_modes2</span> <span class="o">=</span> <span class="n">vib</span><span class="o">.</span><span class="n">vibrational_analysis</span><span class="p">(</span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">mass_batch</span></a><span class="p">,</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">hessian_batch</span></a><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">freq_modes2</span><span class="o">.</span><span class="n">angular_frequencies</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">freq_modes2</span><span class="o">.</span><span class="n">angular_frequencies</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">freq_modes2</span><span class="o">.</span><span class="n">modes</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">freq_modes2</span><span class="o">.</span><span class="n">modes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 6])
+tensor([[0.4082, 0.5774, 0.7071, 0.8165, 1.0000, 1.4142],
+        [0.4082, 0.5774, 0.7071, 0.8165, 1.0000, 1.4142]])
+torch.Size([2, 6, 2, 3])
+tensor([[[[-0.0000, -0.0000, -0.0000],
+          [-0.4082, -0.4082, -0.0000]],
+
+         [[ 0.0000,  0.0000,  0.0000],
+          [-0.4082,  0.4082,  0.0000]],
+
+         [[-0.7071, -0.7071, -0.0000],
+          [-0.0000, -0.0000, -0.0000]],
+
+         [[ 0.0000,  0.0000,  0.0000],
+          [ 0.0000,  0.0000,  0.5774]],
+
+         [[-0.7071,  0.7071,  0.0000],
+          [ 0.0000,  0.0000,  0.0000]],
+
+         [[ 0.0000,  0.0000,  1.0000],
+          [ 0.0000,  0.0000,  0.0000]]],
+
+
+        [[[-0.0000, -0.0000, -0.0000],
+          [-0.4082, -0.4082, -0.0000]],
+
+         [[ 0.0000,  0.0000,  0.0000],
+          [-0.4082,  0.4082,  0.0000]],
+
+         [[-0.7071, -0.7071, -0.0000],
+          [-0.0000, -0.0000, -0.0000]],
+
+         [[ 0.0000,  0.0000,  0.0000],
+          [ 0.0000,  0.0000,  0.5774]],
+
+         [[-0.7071,  0.7071,  0.0000],
+          [ 0.0000,  0.0000,  0.0000]],
+
+         [[ 0.0000,  0.0000,  1.0000],
+          [ 0.0000,  0.0000,  0.0000]]]])
+</pre></div>
+</div>
+<p>Let’s test if the result is a stack of pervious results</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_vibrational_analysis_batch</span><span class="p">():</span>
+    <span class="n">af1</span> <span class="o">=</span> <span class="n">freq_modes1</span><span class="o">.</span><span class="n">angular_frequencies</span>
+    <span class="n">m1</span> <span class="o">=</span> <span class="n">freq_modes1</span><span class="o">.</span><span class="n">modes</span>
+    <span class="n">expected_af</span> <span class="o">=</span> <a href="https://pytorch.org/docs/master/torch.html#torch.stack" title="View documentation for torch.stack"><span class="n">torch</span><span class="o">.</span><span class="n">stack</span></a><span class="p">([</span><span class="n">af1</span><span class="p">,</span> <span class="n">af1</span><span class="p">])</span>
+    <span class="n">expected_modes</span> <span class="o">=</span> <a href="https://pytorch.org/docs/master/torch.html#torch.stack" title="View documentation for torch.stack"><span class="n">torch</span><span class="o">.</span><span class="n">stack</span></a><span class="p">([</span><span class="n">m1</span><span class="p">,</span> <span class="n">m1</span><span class="p">])</span>
+    <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">expected_af</span><span class="p">,</span> <span class="n">freq_modes2</span><span class="o">.</span><span class="n">angular_frequencies</span><span class="p">)</span>
+    <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">expected_modes</span><span class="p">,</span> <span class="n">freq_modes2</span><span class="o">.</span><span class="n">modes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the case when the batch are isomers (i.e. have the same masses), it is also
+possible to just specify the mass as shape <cite>(atoms,)</cite> and it will broadcast
+automatically.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">freq_modes3</span> <span class="o">=</span> <span class="n">vib</span><span class="o">.</span><span class="n">vibrational_analysis</span><span class="p">(</span><a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">mass</span></a><span class="p">,</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">hessian_batch</span></a><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">freq_modes3</span><span class="o">.</span><span class="n">angular_frequencies</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">freq_modes3</span><span class="o">.</span><span class="n">angular_frequencies</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">freq_modes3</span><span class="o">.</span><span class="n">modes</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">freq_modes3</span><span class="o">.</span><span class="n">modes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 6])
+tensor([[0.4082, 0.5774, 0.7071, 0.8165, 1.0000, 1.4142],
+        [0.4082, 0.5774, 0.7071, 0.8165, 1.0000, 1.4142]])
+torch.Size([2, 6, 2, 3])
+tensor([[[[-0.0000, -0.0000, -0.0000],
+          [-0.4082, -0.4082, -0.0000]],
+
+         [[ 0.0000,  0.0000,  0.0000],
+          [-0.4082,  0.4082,  0.0000]],
+
+         [[-0.7071, -0.7071, -0.0000],
+          [-0.0000, -0.0000, -0.0000]],
+
+         [[ 0.0000,  0.0000,  0.0000],
+          [ 0.0000,  0.0000,  0.5774]],
+
+         [[-0.7071,  0.7071,  0.0000],
+          [ 0.0000,  0.0000,  0.0000]],
+
+         [[ 0.0000,  0.0000,  1.0000],
+          [ 0.0000,  0.0000,  0.0000]]],
+
+
+        [[[-0.0000, -0.0000, -0.0000],
+          [-0.4082, -0.4082, -0.0000]],
+
+         [[ 0.0000,  0.0000,  0.0000],
+          [-0.4082,  0.4082,  0.0000]],
+
+         [[-0.7071, -0.7071, -0.0000],
+          [-0.0000, -0.0000, -0.0000]],
+
+         [[ 0.0000,  0.0000,  0.0000],
+          [ 0.0000,  0.0000,  0.5774]],
+
+         [[-0.7071,  0.7071,  0.0000],
+          [ 0.0000,  0.0000,  0.0000]],
+
+         [[ 0.0000,  0.0000,  1.0000],
+          [ 0.0000,  0.0000,  0.0000]]]])
+</pre></div>
+</div>
+<p>Let’s test if we still have the same result</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_vibrational_analysis_batch_broadcast</span><span class="p">():</span>
+    <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">freq_modes2</span><span class="o">.</span><span class="n">angular_frequencies</span><span class="p">,</span> <span class="n">freq_modes3</span><span class="o">.</span><span class="n">angular_frequencies</span><span class="p">)</span>
+    <span class="k">assert</span> <a href="https://pytorch.org/docs/master/torch.html#torch.allclose" title="View documentation for torch.allclose"><span class="n">torch</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">(</span><span class="n">freq_modes2</span><span class="o">.</span><span class="n">modes</span><span class="p">,</span> <span class="n">freq_modes3</span><span class="o">.</span><span class="n">modes</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>Now let’s run all the tests</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><a href="https://docs.python.org/3/library/sys.html#sys.argv" title="View documentation for sys.argv"><span class="n">sys</span><span class="o">.</span><span class="n">argv</span></a><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;-v&#39;</span><span class="p">])</span>
@@ -283,17 +573,21 @@ only the contribution from x,y plane, it can be written as:</p>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>============================= test session starts ==============================
-platform linux -- Python 3.6.9, pytest-5.3.0, py-1.8.0, pluggy-0.13.1 -- /opt/hostedtoolcache/Python/3.6.9/x64/bin/python
+platform linux -- Python 3.7.5, pytest-5.3.0, py-1.8.0, pluggy-0.13.1 -- /opt/hostedtoolcache/Python/3.7.5/x64/bin/python
 cachedir: .pytest_cache
 rootdir: /home/runner/work/nnp/nnp, inifile: setup.cfg
-collecting ... collected 1 item
+collecting ... collected 5 items
 
-vibration.py::test_analytical_hessian PASSED                             [100%]
+vibration.py::test_analytical_hessian PASSED                             [ 20%]
+vibration.py::test_analytical_hessian_batch PASSED                       [ 40%]
+vibration.py::test_vibrational_analysis PASSED                           [ 60%]
+vibration.py::test_vibrational_analysis_batch PASSED                     [ 80%]
+vibration.py::test_vibrational_analysis_batch_broadcast PASSED           [100%]
 
-============================== 1 passed in 0.02s ===============================
+============================== 5 passed in 0.07s ===============================
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.142 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.162 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-vibration-py">
 <div class="sphx-glr-download docutils container">
 <a class="reference download internal" download="" href="../_downloads/b187ac6e1c4ac6ac4f2f98b431390567/vibration.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">vibration.py</span></code></a></div>
@@ -301,6 +595,7 @@ vibration.py::test_analytical_hessian PASSED                             [100%]
 <a class="reference download internal" download="" href="../_downloads/16fba95bceee252f09e916507b9e5989/vibration.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">vibration.ipynb</span></code></a></div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
 </div>
 
 
@@ -311,10 +606,10 @@ vibration.py::test_analytical_hessian PASSED                             [100%]
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="planetary_motion.html" class="btn btn-neutral float-right" title="Use ASE to Simulate Planetary Motion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../api.html" class="btn btn-neutral float-right" title="SO(3) Lie Group Operations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="rotation3d.html" class="btn btn-neutral float-left" title="Rotation in 3D Space" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="planetary_motion.html" class="btn btn-neutral float-left" title="Use ASE to Simulate Planetary Motion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

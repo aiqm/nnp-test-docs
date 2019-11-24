@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nnp.vib &mdash; NNP 0.0.4.dev3+g1a9c400 documentation</title>
+  <title>nnp.vib &mdash; NNP 0.0.4.dev4+g945bd15 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.0.4.dev3+g1a9c400
+                0.0.4.dev4+g945bd15
               </div>
             
           
@@ -91,8 +91,8 @@
 <p class="caption"><span class="caption-text">Examples</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/rotation3d.html">Rotation in 3D Space</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples/vibration.html">Analytical Hessians and Vibrational Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/planetary_motion.html">Use ASE to Simulate Planetary Motion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/vibration.html">Analytical Hessians and Vibrational Analysis</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
@@ -297,7 +297,7 @@
     <span class="n">mass_scaled_hessian</span> <span class="o">=</span> <span class="n">hessian</span> <span class="o">*</span> <span class="n">inv_sqrt_mass</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">inv_sqrt_mass</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">symeig</span><span class="p">(</span><span class="n">mass_scaled_hessian</span><span class="p">,</span> <span class="n">eigenvectors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">angular_frequencies</span> <span class="o">=</span> <span class="n">eigenvalues</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span>
-    <span class="n">modes</span> <span class="o">=</span> <span class="p">(</span><span class="n">eigenvectors</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">inv_sqrt_mass</span><span class="p">)</span>
+    <span class="n">modes</span> <span class="o">=</span> <span class="p">(</span><span class="n">eigenvectors</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">inv_sqrt_mass</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
     <span class="n">new_shape</span> <span class="o">=</span> <span class="n">modes</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
     <span class="n">modes</span> <span class="o">=</span> <span class="n">modes</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">new_shape</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">FreqsModes</span><span class="p">(</span><span class="n">angular_frequencies</span><span class="p">,</span> <span class="n">modes</span><span class="p">)</span></div>

@@ -125,7 +125,7 @@ def vibrational_analysis(masses: Tensor, hessian: Tensor) -> FreqsModes:
     mass_scaled_hessian = hessian * inv_sqrt_mass.unsqueeze(-2) * inv_sqrt_mass.unsqueeze(-1)
     eigenvalues, eigenvectors = torch.symeig(mass_scaled_hessian, eigenvectors=True)
     angular_frequencies = eigenvalues.sqrt()
-    modes = (eigenvectors.transpose(-1, -2) * inv_sqrt_mass)
+    modes = (eigenvectors.transpose(-1, -2) * inv_sqrt_mass.unsqueeze(-2))
     new_shape = modes.shape[:-1] + (-1, 3)
     modes = modes.reshape(new_shape)
     return FreqsModes(angular_frequencies, modes)

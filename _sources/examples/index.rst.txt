@@ -9,7 +9,7 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This tutorial demonstrates how rotate a group of points in 3D space. ">
+    <div class="sphx-glr-thumbcontainer" tooltip="This tutorial demonstrates how rotate a group of points in 3D space.">
 
 .. only:: html
 
@@ -26,26 +26,6 @@ Examples
    :hidden:
 
    /examples/rotation3d
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="This tutorial demonstrates how compute analytical hessians and do vibrational analysis using nn...">
-
-.. only:: html
-
- .. figure:: /examples/images/thumb/sphx_glr_vibration_thumb.png
-
-     :ref:`sphx_glr_examples_vibration.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /examples/vibration
 
 .. raw:: html
 
@@ -66,6 +46,26 @@ Examples
    :hidden:
 
    /examples/planetary_motion
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This tutorial demonstrates how compute analytical hessians and do vibrational analysis using nn...">
+
+.. only:: html
+
+ .. figure:: /examples/images/thumb/sphx_glr_vibration_thumb.png
+
+     :ref:`sphx_glr_examples_vibration.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/vibration
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>
