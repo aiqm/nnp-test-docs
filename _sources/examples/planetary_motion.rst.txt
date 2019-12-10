@@ -237,7 +237,7 @@ the XY plane and if the trajectory is circle:
     planetary_motion.py::test_is_on_xy_plan PASSED                           [ 50%]
     planetary_motion.py::test_is_circle PASSED                               [100%]
 
-    ============================== 2 passed in 27.13s ==============================
+    ============================== 2 passed in 24.98s ==============================
 
 
 
@@ -245,7 +245,7 @@ the XY plane and if the trajectory is circle:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  54.867 seconds)
+   **Total running time of the script:** ( 0 minutes  50.036 seconds)
 
 
 .. _sphx_glr_download_examples_planetary_motion.py:
