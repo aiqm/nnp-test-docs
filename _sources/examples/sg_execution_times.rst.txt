@@ -5,12 +5,12 @@
 
 Computation times
 =================
-**00:59.117** total execution time for **examples** files:
+**00:52.035** total execution time for **examples** files:
 
 +------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_planetary_motion.py` (``planetary_motion.py``) | 00:58.311 | 0.0 MB |
+| :ref:`sphx_glr_examples_planetary_motion.py` (``planetary_motion.py``) | 00:51.222 | 0.0 MB |
 +------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_rotation3d.py` (``rotation3d.py``)             | 00:00.601 | 0.0 MB |
+| :ref:`sphx_glr_examples_rotation3d.py` (``rotation3d.py``)             | 00:00.676 | 0.0 MB |
 +------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_vibration.py` (``vibration.py``)               | 00:00.206 | 0.0 MB |
+| :ref:`sphx_glr_examples_vibration.py` (``vibration.py``)               | 00:00.137 | 0.0 MB |
 +------------------------------------------------------------------------+-----------+--------+
