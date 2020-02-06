@@ -572,7 +572,7 @@ Now let's run all the tests
  .. code-block:: none
 
     ============================= test session starts ==============================
-    platform linux -- Python 3.6.10, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- /opt/hostedtoolcache/Python/3.6.10/x64/bin/python
+    platform linux -- Python 3.7.6, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- /opt/hostedtoolcache/Python/3.7.6/x64/bin/python
     cachedir: .pytest_cache
     rootdir: /home/runner/work/nnp/nnp, inifile: setup.cfg
     collecting ... collected 5 items
@@ -591,7 +591,7 @@ Now let's run all the tests
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.118 seconds)
+   **Total running time of the script:** ( 0 minutes  0.114 seconds)
 
 
 .. _sphx_glr_download_examples_vibration.py:
