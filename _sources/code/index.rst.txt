@@ -98,13 +98,13 @@ This is the actually implementation. It is also self explained and export to doc
     :class: sphx-glr-footer-gallery
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
     :download:`Download all examples in Python source code: code_python.zip <//home/runner/work/nnp/nnp/docs/code/code_python.zip>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
     :download:`Download all examples in Jupyter notebooks: code_jupyter.zip <//home/runner/work/nnp/nnp/docs/code/code_jupyter.zip>`
 

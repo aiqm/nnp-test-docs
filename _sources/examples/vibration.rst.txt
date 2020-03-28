@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_examples_vibration.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_examples_vibration.py:
+        Click :ref:`here <sphx_glr_download_examples_vibration.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_examples_vibration.py:
 
 
 Analytical Hessians and Vibrational Analysis
@@ -583,7 +585,7 @@ Now let's run all the tests
     vibration.py::test_vibrational_analysis_batch PASSED                     [ 80%]
     vibration.py::test_vibrational_analysis_batch_broadcast PASSED           [100%]
 
-    ============================== 5 passed in 0.06s ===============================
+    ============================== 5 passed in 0.05s ===============================
 
 
 
@@ -591,7 +593,7 @@ Now let's run all the tests
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.134 seconds)
+   **Total running time of the script:** ( 0 minutes  0.126 seconds)
 
 
 .. _sphx_glr_download_examples_vibration.py:
@@ -604,13 +606,13 @@ Now let's run all the tests
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: vibration.py <vibration.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: vibration.ipynb <vibration.ipynb>`
 

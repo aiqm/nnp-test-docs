@@ -35,6 +35,8 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Vibrational Analysis" href="vib.html" />
@@ -177,19 +179,19 @@
             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Click <a class="reference internal" href="#sphx-glr-download-code-pbc-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+<p class="last">Click <a class="reference internal" href="#sphx-glr-download-code-pbc-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="periodic-boundary-conditions">
 <span id="sphx-glr-code-pbc-py"></span><h1>Periodic Boundary Conditions<a class="headerlink" href="#periodic-boundary-conditions" title="Permalink to this headline">¶</a></h1>
 <p>The module <code class="docutils literal notranslate"><span class="pre">nnp.pbc</span></code> contains tools to deal with periodic boundary conditions.</p>
 <p>Let’s first import all the packages we will use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">Tensor</span></a>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="torch.Tensor" class="sphx-glr-backref-module-torch sphx-glr-backref-type-py-class"><span class="n">Tensor</span></a>
 </pre></div>
 </div>
 <p>The following function computes the number of repeats required to capture
 all the neighbor atoms within the cutoff radius.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">num_repeats</span><span class="p">(</span><span class="n">cell</span><span class="p">:</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">Tensor</span></a><span class="p">,</span> <span class="n">pbc</span><span class="p">:</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">Tensor</span></a><span class="p">,</span> <span class="n">cutoff</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">Tensor</span></a><span class="p">:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">num_repeats</span><span class="p">(</span><span class="n">cell</span><span class="p">:</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="torch.Tensor" class="sphx-glr-backref-module-torch sphx-glr-backref-type-py-class"><span class="n">Tensor</span></a><span class="p">,</span> <span class="n">pbc</span><span class="p">:</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="torch.Tensor" class="sphx-glr-backref-module-torch sphx-glr-backref-type-py-class"><span class="n">Tensor</span></a><span class="p">,</span> <span class="n">cutoff</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="torch.Tensor" class="sphx-glr-backref-module-torch sphx-glr-backref-type-py-class"><span class="n">Tensor</span></a><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Compute the number of repeats required along each cell vector to make</span>
 <span class="sd">    the original cell and repeated cells together form a large enough box</span>
 <span class="sd">    so that for each atom in the original cell, all its neighbor atoms within</span>
@@ -213,11 +215,11 @@ all the neighbor atoms within the cutoff radius.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">reciprocal_cell</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
     <span class="n">inv_distances</span> <span class="o">=</span> <span class="n">reciprocal_cell</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <a href="https://pytorch.org/docs/master/torch.html#torch.ceil" title="View documentation for torch.ceil"><span class="n">torch</span><span class="o">.</span><span class="n">ceil</span></a><span class="p">(</span><span class="n">cutoff</span> <span class="o">*</span> <span class="n">inv_distances</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
-    <span class="k">return</span> <a href="https://pytorch.org/docs/master/torch.html#torch.where" title="View documentation for torch.where"><span class="n">torch</span><span class="o">.</span><span class="n">where</span></a><span class="p">(</span><span class="n">pbc</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <a href="https://pytorch.org/docs/master/torch.html#torch.tensor" title="View documentation for torch.tensor"><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span></a><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">=</span> <a href="https://pytorch.org/docs/master/torch.html#torch.ceil" title="torch.ceil" class="sphx-glr-backref-module-torch sphx-glr-backref-type-py-function"><span class="n">torch</span><span class="o">.</span><span class="n">ceil</span></a><span class="p">(</span><span class="n">cutoff</span> <span class="o">*</span> <span class="n">inv_distances</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+    <span class="k">return</span> <a href="https://pytorch.org/docs/master/torch.html#torch.where" title="torch.where" class="sphx-glr-backref-module-torch sphx-glr-backref-type-py-function"><span class="n">torch</span><span class="o">.</span><span class="n">where</span></a><span class="p">(</span><span class="n">pbc</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <a href="https://pytorch.org/docs/master/torch.html#torch.tensor" title="torch.tensor" class="sphx-glr-backref-module-torch sphx-glr-backref-type-py-function"><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span></a><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">map2central</span><span class="p">(</span><span class="n">cell</span><span class="p">:</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">Tensor</span></a><span class="p">,</span> <span class="n">coordinates</span><span class="p">:</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">Tensor</span></a><span class="p">,</span> <span class="n">pbc</span><span class="p">:</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">Tensor</span></a><span class="p">)</span> <span class="o">-&gt;</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="View documentation for torch.Tensor"><span class="n">Tensor</span></a><span class="p">:</span>
+<span class="k">def</span> <span class="nf">map2central</span><span class="p">(</span><span class="n">cell</span><span class="p">:</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="torch.Tensor" class="sphx-glr-backref-module-torch sphx-glr-backref-type-py-class"><span class="n">Tensor</span></a><span class="p">,</span> <span class="n">coordinates</span><span class="p">:</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="torch.Tensor" class="sphx-glr-backref-module-torch sphx-glr-backref-type-py-class"><span class="n">Tensor</span></a><span class="p">,</span> <span class="n">pbc</span><span class="p">:</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="torch.Tensor" class="sphx-glr-backref-module-torch sphx-glr-backref-type-py-class"><span class="n">Tensor</span></a><span class="p">)</span> <span class="o">-&gt;</span> <a href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="torch.Tensor" class="sphx-glr-backref-module-torch sphx-glr-backref-type-py-class"><span class="n">Tensor</span></a><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Map atoms outside the unit cell into the cell using PBC.</span>
 
 <span class="sd">    Arguments:</span>
@@ -237,7 +239,7 @@ all the neighbor atoms within the cutoff radius.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Step 1: convert coordinates from standard cartesian coordinate to unit</span>
     <span class="c1"># cell coordinates</span>
-    <span class="n">inv_cell</span> <span class="o">=</span> <a href="https://pytorch.org/docs/master/torch.html#torch.inverse" title="View documentation for torch.inverse"><span class="n">torch</span><span class="o">.</span><span class="n">inverse</span></a><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+    <span class="n">inv_cell</span> <span class="o">=</span> <a href="https://pytorch.org/docs/master/torch.html#torch.inverse" title="torch.inverse" class="sphx-glr-backref-module-torch sphx-glr-backref-type-py-function"><span class="n">torch</span><span class="o">.</span><span class="n">inverse</span></a><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
     <span class="n">coordinates_cell</span> <span class="o">=</span> <span class="n">coordinates</span> <span class="o">@</span> <span class="n">inv_cell</span>
     <span class="c1"># Step 2: wrap cell coordinates into [0, 1)</span>
     <span class="n">coordinates_cell</span> <span class="o">-=</span> <span class="n">coordinates_cell</span><span class="o">.</span><span class="n">floor</span><span class="p">()</span> <span class="o">*</span> <span class="n">pbc</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">coordinates_cell</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
@@ -248,9 +250,9 @@ all the neighbor atoms within the cutoff radius.</p>
 </div>
 <p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.001 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-code-pbc-py">
-<div class="sphx-glr-download docutils container">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
 <a class="reference download internal" download="" href="../_downloads/ded7a49b51f9c943442b92bfef6d6378/pbc.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">pbc.py</span></code></a></div>
-<div class="sphx-glr-download docutils container">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <a class="reference download internal" download="" href="../_downloads/ad5cbfa697ff3016e83531ec49de136e/pbc.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">pbc.ipynb</span></code></a></div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>

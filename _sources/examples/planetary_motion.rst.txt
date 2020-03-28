@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_examples_planetary_motion.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_examples_planetary_motion.py:
+        Click :ref:`here <sphx_glr_download_examples_planetary_motion.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_examples_planetary_motion.py:
 
 
 Use ASE to Simulate Planetary Motion
@@ -237,7 +239,7 @@ the XY plane and if the trajectory is circle:
     planetary_motion.py::test_is_on_xy_plan PASSED                           [ 50%]
     planetary_motion.py::test_is_circle PASSED                               [100%]
 
-    ============================== 2 passed in 26.26s ==============================
+    ============================== 2 passed in 20.78s ==============================
 
 
 
@@ -245,7 +247,7 @@ the XY plane and if the trajectory is circle:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  53.271 seconds)
+   **Total running time of the script:** ( 0 minutes  42.263 seconds)
 
 
 .. _sphx_glr_download_examples_planetary_motion.py:
@@ -258,13 +260,13 @@ the XY plane and if the trajectory is circle:
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: planetary_motion.py <planetary_motion.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: planetary_motion.ipynb <planetary_motion.ipynb>`
 
