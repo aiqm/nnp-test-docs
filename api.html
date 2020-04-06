@@ -178,9 +178,9 @@
   <span class="target" id="module-nnp.so3"></span><div class="section" id="so-3-lie-group-operations">
 <h1>SO(3) Lie Group Operations<a class="headerlink" href="#so-3-lie-group-operations" title="Permalink to this headline">¶</a></h1>
 <p>The module <code class="docutils literal notranslate"><span class="pre">nnp.so3</span></code> contains tools to rotate point clouds in 3D space.</p>
-<dl class="function">
+<dl class="py function">
 <dt id="nnp.so3.rotate_along">
-<code class="descclassname">nnp.so3.</code><code class="descname">rotate_along</code><span class="sig-paren">(</span><em>axis: torch.Tensor</em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="_modules/nnp/so3.html#rotate_along"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.so3.rotate_along" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">nnp.so3.</code><code class="descname">rotate_along</code><span class="sig-paren">(</span><em><span class="n">axis</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a><a class="reference internal" href="_modules/nnp/so3.html#rotate_along"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.so3.rotate_along" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute group elements of rotating along an axis passing origin.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -201,9 +201,9 @@ or anti-clockwise.</td>
 <h1>Molecular Dynamics<a class="headerlink" href="#molecular-dynamics" title="Permalink to this headline">¶</a></h1>
 <p>The module <code class="docutils literal notranslate"><span class="pre">nnp.md</span></code> provide tools to run molecular dynamics with a potential
 defined by PyTorch.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="nnp.md.Calculator">
-<em class="property">class </em><code class="descclassname">nnp.md.</code><code class="descname">Calculator</code><span class="sig-paren">(</span><em>func: Callable[[Sequence[str], torch.Tensor, torch.Tensor, torch.Tensor], torch.Tensor], overwrite: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nnp/md.html#Calculator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.md.Calculator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">nnp.md.</code><code class="descname">Calculator</code><span class="sig-paren">(</span><em><span class="n">func</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>Sequence<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span><span class="p">, </span><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a><span class="p">, </span><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a><span class="p">, </span><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a><span class="p">]</span><span class="p">, </span><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a><span class="p">]</span></span></em>, <em><span class="n">overwrite</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nnp/md.html#Calculator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.md.Calculator" title="Permalink to this definition">¶</a></dt>
 <dd><p>ASE Calculator that wraps a neural network potential</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -219,9 +219,9 @@ object with the wrapped positions.</li>
 </tr>
 </tbody>
 </table>
-<dl class="method">
+<dl class="py method">
 <dt id="nnp.md.Calculator.calculate">
-<code class="descname">calculate</code><span class="sig-paren">(</span><em>atoms=None, properties=['energy'], system_changes=['positions', 'numbers', 'cell', 'pbc', 'initial_charges', 'initial_magmoms']</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nnp/md.html#Calculator.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.md.Calculator.calculate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">calculate</code><span class="sig-paren">(</span><em><span class="n">atoms</span><span class="o">=</span><span class="default_value">None</span></em>, <em><span class="n">properties</span><span class="o">=</span><span class="default_value">['energy']</span></em>, <em><span class="n">system_changes</span><span class="o">=</span><span class="default_value">['positions', 'numbers', 'cell', 'pbc', 'initial_charges', 'initial_magmoms']</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nnp/md.html#Calculator.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.md.Calculator.calculate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Do the calculation.</p>
 <dl class="docutils">
 <dt>properties: list of str</dt><dd>List of what needs to be calculated.  Can be any combination
@@ -254,9 +254,9 @@ implementation to set the atoms attribute.</p>
 <span class="target" id="module-nnp.pbc"></span><div class="section" id="periodic-boundary-conditions">
 <h1>Periodic Boundary Conditions<a class="headerlink" href="#periodic-boundary-conditions" title="Permalink to this headline">¶</a></h1>
 <p>The module <code class="docutils literal notranslate"><span class="pre">nnp.pbc</span></code> contains tools to deal with periodic boundary conditions.</p>
-<dl class="function">
+<dl class="py function">
 <dt id="nnp.pbc.map2central">
-<code class="descclassname">nnp.pbc.</code><code class="descname">map2central</code><span class="sig-paren">(</span><em>cell: torch.Tensor</em>, <em>coordinates: torch.Tensor</em>, <em>pbc: torch.Tensor</em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="_modules/nnp/pbc.html#map2central"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.pbc.map2central" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">nnp.pbc.</code><code class="descname">map2central</code><span class="sig-paren">(</span><em><span class="n">cell</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a></span></em>, <em><span class="n">coordinates</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a></span></em>, <em><span class="n">pbc</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a><a class="reference internal" href="_modules/nnp/pbc.html#map2central"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.pbc.map2central" title="Permalink to this definition">¶</a></dt>
 <dd><p>Map atoms outside the unit cell into the cell using PBC.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -282,9 +282,9 @@ implementation to set the atoms attribute.</p>
 </table>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="nnp.pbc.num_repeats">
-<code class="descclassname">nnp.pbc.</code><code class="descname">num_repeats</code><span class="sig-paren">(</span><em>cell: torch.Tensor</em>, <em>pbc: torch.Tensor</em>, <em>cutoff: float</em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="_modules/nnp/pbc.html#num_repeats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.pbc.num_repeats" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">nnp.pbc.</code><code class="descname">num_repeats</code><span class="sig-paren">(</span><em><span class="n">cell</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a></span></em>, <em><span class="n">pbc</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a></span></em>, <em><span class="n">cutoff</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a><a class="reference internal" href="_modules/nnp/pbc.html#num_repeats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.pbc.num_repeats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the number of repeats required along each cell vector to make
 the original cell and repeated cells together form a large enough box
 so that for each atom in the original cell, all its neighbor atoms within
@@ -319,16 +319,16 @@ of atoms in the ceter cell</p>
 <h1>Vibrational Analysis<a class="headerlink" href="#vibrational-analysis" title="Permalink to this headline">¶</a></h1>
 <p>The module <code class="docutils literal notranslate"><span class="pre">nnp.vib</span></code> contains tools to compute analytical hessian
 and do vibrational analysis.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="nnp.vib.FreqsModes">
-<em class="property">class </em><code class="descclassname">nnp.vib.</code><code class="descname">FreqsModes</code><span class="sig-paren">(</span><em>angular_frequencies</em>, <em>modes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nnp/vib.html#FreqsModes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.vib.FreqsModes" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
+<em class="property">class </em><code class="descclassname">nnp.vib.</code><code class="descname">FreqsModes</code><span class="sig-paren">(</span><em><span class="n">angular_frequencies</span></em>, <em><span class="n">modes</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nnp/vib.html#FreqsModes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.vib.FreqsModes" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
 <dt id="nnp.vib.FreqsModes.angular_frequencies">
 <em class="property">property </em><code class="descname">angular_frequencies</code><a class="headerlink" href="#nnp.vib.FreqsModes.angular_frequencies" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 0</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="nnp.vib.FreqsModes.modes">
 <em class="property">property </em><code class="descname">modes</code><a class="headerlink" href="#nnp.vib.FreqsModes.modes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 1</p>
@@ -336,9 +336,9 @@ and do vibrational analysis.</p>
 
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="nnp.vib.hessian">
-<code class="descclassname">nnp.vib.</code><code class="descname">hessian</code><span class="sig-paren">(</span><em>coordinates: torch.Tensor</em>, <em>energies: Optional[torch.Tensor] = None</em>, <em>forces: Optional[torch.Tensor] = None</em><span class="sig-paren">)</span> &#x2192; torch.Tensor<a class="reference internal" href="_modules/nnp/vib.html#hessian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.vib.hessian" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">nnp.vib.</code><code class="descname">hessian</code><span class="sig-paren">(</span><em><span class="n">coordinates</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a></span></em>, <em><span class="n">energies</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em><span class="n">forces</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a><a class="reference internal" href="_modules/nnp/vib.html#hessian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.vib.hessian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute analytical hessian from the energy graph or force graph.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -362,9 +362,9 @@ be computed from <cite>coordinates</cite> in a graph.</li>
 </table>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="nnp.vib.vibrational_analysis">
-<code class="descclassname">nnp.vib.</code><code class="descname">vibrational_analysis</code><span class="sig-paren">(</span><em>masses: torch.Tensor</em>, <em>hessian: torch.Tensor</em><span class="sig-paren">)</span> &#x2192; nnp.vib.FreqsModes<a class="reference internal" href="_modules/nnp/vib.html#vibrational_analysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.vib.vibrational_analysis" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">nnp.vib.</code><code class="descname">vibrational_analysis</code><span class="sig-paren">(</span><em><span class="n">masses</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a></span></em>, <em><span class="n">hessian</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://pytorch.org/docs/master/tensors.html#torch.Tensor" title="(in PyTorch vmaster (1.6.0a0+66d5006 ))">torch.Tensor</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#nnp.vib.FreqsModes" title="nnp.vib.FreqsModes">nnp.vib.FreqsModes</a><a class="reference internal" href="_modules/nnp/vib.html#vibrational_analysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nnp.vib.vibrational_analysis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computing the vibrational wavenumbers from hessian.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
