@@ -139,7 +139,7 @@ Now let's run all the tests
  .. code-block:: none
 
     ============================= test session starts ==============================
-    platform linux -- Python 3.6.10, pytest-5.4.2, py-1.8.1, pluggy-0.13.1 -- /opt/hostedtoolcache/Python/3.6.10/x64/bin/python
+    platform linux -- Python 3.7.6, pytest-5.4.2, py-1.8.1, pluggy-0.13.1 -- /opt/hostedtoolcache/Python/3.7.6/x64/bin/python
     cachedir: .pytest_cache
     rootdir: /home/runner/work/nnp/nnp, inifile: setup.cfg
     collecting ... collected 1 item
@@ -154,7 +154,7 @@ Now let's run all the tests
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.762 seconds)
+   **Total running time of the script:** ( 0 minutes  7.320 seconds)
 
 
 .. _sphx_glr_download_examples_rotation3d.py:
