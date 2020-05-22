@@ -9,11 +9,12 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="This tutorial demonstrates how rotate a group of points in 3D space. ">
+    <div class="sphx-glr-thumbcontainer" tooltip="This tutorial demonstrates how rotate a group of points in 3D space.">
 
 .. only:: html
 
  .. figure:: /examples/images/thumb/sphx_glr_rotation3d_thumb.png
+     :alt: Rotation in 3D Space
 
      :ref:`sphx_glr_examples_rotation3d.py`
 
@@ -34,6 +35,7 @@ Examples
 .. only:: html
 
  .. figure:: /examples/images/thumb/sphx_glr_planetary_motion_thumb.png
+     :alt: Use ASE to Simulate Planetary Motion
 
      :ref:`sphx_glr_examples_planetary_motion.py`
 
@@ -54,6 +56,7 @@ Examples
 .. only:: html
 
  .. figure:: /examples/images/thumb/sphx_glr_vibration_thumb.png
+     :alt: Analytical Hessians and Vibrational Analysis
 
      :ref:`sphx_glr_examples_vibration.py`
 
