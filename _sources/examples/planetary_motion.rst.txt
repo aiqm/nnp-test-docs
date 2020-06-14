@@ -232,7 +232,7 @@ the XY plane and if the trajectory is circle:
  .. code-block:: none
 
     ============================= test session starts ==============================
-    platform linux -- Python 3.6.10, pytest-5.4.3, py-1.8.1, pluggy-0.13.1 -- /opt/hostedtoolcache/Python/3.6.10/x64/bin/python
+    platform linux -- Python 3.7.7, pytest-5.4.3, py-1.8.1, pluggy-0.13.1 -- /opt/hostedtoolcache/Python/3.7.7/x64/bin/python
     cachedir: .pytest_cache
     rootdir: /home/runner/work/nnp/nnp, inifile: setup.cfg
     collecting ... collected 2 items
@@ -240,7 +240,7 @@ the XY plane and if the trajectory is circle:
     planetary_motion.py::test_is_on_xy_plan PASSED                           [ 50%]
     planetary_motion.py::test_is_circle PASSED                               [100%]
 
-    ============================== 2 passed in 21.16s ==============================
+    ============================== 2 passed in 24.66s ==============================
 
 
 
@@ -248,7 +248,7 @@ the XY plane and if the trajectory is circle:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  42.347 seconds)
+   **Total running time of the script:** ( 0 minutes  50.223 seconds)
 
 
 .. _sphx_glr_download_examples_planetary_motion.py:
